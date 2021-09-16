@@ -4,7 +4,7 @@
 
 * [9:30 AM] read the email
 * [2.40 PM - 3:45 PM] Initiated the react app in between work
-* [5:03 PM - ] Started working again
+* [5:03 PM - 10:09] Started working again
 
 #### Some Considerations (Due to shortage of time) ####
 * Avoided Using Webpack due to shortage of time
