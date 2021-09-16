@@ -2,12 +2,12 @@ import * as React from 'react'
 import get from 'lodash/get'
 
 type ITableProps<T> {
-  properties: Array<keyof T>
+  properties: Array<string>
   data: Array<T>
   children?: React.ReactNode
   headerTitles?: any
-  customHeader?: (({ title, property }: { title: string, property: string }) => string | React.ReactNode)
-  customBody?: ({ item }: { item: T }) => string | React.ReactNode
+  customHeader?: ({ title, property }: any) => string | React.ReactNode
+  customBody?: ({ row, column }: any) => string | React.ReactNode
 }
 
 const Table = <T, >({
@@ -21,7 +21,7 @@ const Table = <T, >({
   return (
     <div className={'table-container'}>
       <table>
-        <thead>
+        <thead>  
           <tr>
             {
               properties.map((item) => {
@@ -31,7 +31,28 @@ const Table = <T, >({
             }
           </tr>
         </thead>
+        <tbody>
+          {
+            data.map((row) => {
+              return (
+                <tr>
+                  {
+                    properties.map((column) => {
+                      return (
+                        <td>
+                          {customBody ? customBody({ column, row}) : <></>}
+                        </td>
+                      )
+                    })
+                  }
+                </tr>
+              )
+            })
+          }
+        </tbody>
       </table>
     </div>
   )
 }
+
+export default Table
