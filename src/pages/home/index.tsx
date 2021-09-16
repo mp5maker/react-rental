@@ -7,6 +7,7 @@ import Footer from '../../components/footer'
 import swal from '../../utitlities/swal'
 import get from 'lodash/get'
 import useSearch from '../../hooks/useSearch'
+import Book from '../../components/common/book'
 
 interface IHomeProps {}
 
@@ -26,7 +27,9 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
 
   const onBook = () => {
     swal.fire({
-      html: <div>Book in progress</div>
+      html: (
+        <Book rentals={rentals} />
+      )
     })
   }
 
