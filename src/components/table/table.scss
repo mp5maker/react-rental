@@ -1,0 +1,19 @@
+.table-container {
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.12);
+  padding: var(--mediumSpace);
+  border-radius: var(--commonBorderRadius);
+  table {
+    table-layout: fixed;
+    width: 100%;
+    thead {
+      th {
+        text-align: left;
+      }
+    }
+    tbody {
+      td {
+        text-align: left;
+      }
+    }
+  }
+}

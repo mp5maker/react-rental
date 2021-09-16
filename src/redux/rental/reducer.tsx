@@ -1,6 +1,5 @@
 const initialState = {
-  data: [],
-  filteredData: []
+  data: []
 }
 
 enum ACTION_TYPES {
