@@ -49,13 +49,13 @@ const Table = <T,>({
                     key={`${generatedUUID}-${generator.next().value}-${headerKey}-${item}`}
                     {...thProps}
                   >
-                    ID
+                    <div>ID</div>
                   </th>
                 )
               }
               return (
                 <th key={`${generatedUUID}-${generator.next().value}-${headerKey}`} {...thProps}>
-                  {customHeader ? customHeader({ title, property: item }) : title}
+                  <div>{customHeader ? customHeader({ title, property: item }) : title}</div>
                 </th>
               )
             })}
