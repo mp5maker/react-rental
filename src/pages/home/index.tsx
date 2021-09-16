@@ -4,14 +4,24 @@ import Table from '../../components/table'
 import useRental from '../../hooks/useRental'
 import isNil from 'lodash/isNil'
 import Footer from '../../components/footer'
+import swal from '../../utitlities/swal'
 
 interface IHomeProps {}
 
 const Home: React.FC<IHomeProps> = (): JSX.Element => {
   const { rentals } = useRental()
 
-  const onBook = () => {}
-  const onReturn = () => {}
+  const onBook = () => {
+    swal.fire({
+      html: <div>Book in progress</div>
+    })
+  }
+
+  const onReturn = () => {
+    swal.fire({
+      html: <div>Return in progress</div>
+    })
+  }
 
   return (
     <div className={'page-container home-container'}>
