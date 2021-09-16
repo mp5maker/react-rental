@@ -1,9 +1,12 @@
 import * as React from 'react'
+import './search.scss'
 
-interface ISearchProps {}
+type TSearchProps = React.HTMLAttributes<HTMLInputElement> & {
+  value?: string
+}
 
-const Search: React.FC<ISearchProps> = () => {
-  return <></>
+const Search: React.FC<TSearchProps> = ({ ...props }) => {
+  return <input {...props} />
 }
 
 export default Search

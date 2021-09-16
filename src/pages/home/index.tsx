@@ -5,11 +5,24 @@ import useRental from '../../hooks/useRental'
 import isNil from 'lodash/isNil'
 import Footer from '../../components/footer'
 import swal from '../../utitlities/swal'
+import get from 'lodash/get'
+import useSearch from '../../hooks/useSearch'
 
 interface IHomeProps {}
 
 const Home: React.FC<IHomeProps> = (): JSX.Element => {
   const { rentals } = useRental()
+  const { list, search } = useSearch({ data: rentals })
+  const [searchText, setSearchText] = React.useState<string>('')
+
+  const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = get(event, 'target.value', '')
+    search({
+      properties: ['code', 'name', 'type', 'durability', 'mileage'],
+      search: value
+    })
+    setSearchText(value)
+  }
 
   const onBook = () => {
     swal.fire({
@@ -25,9 +38,9 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
 
   return (
     <div className={'page-container home-container'}>
-      <Header />
+      <Header onChangeSearch={onChangeSearch} searchText={searchText} />
       <Table
-        data={rentals}
+        data={list}
         properties={['name', 'code', 'availability', 'needing_repair', 'durability', 'mileage']}
         headerTitles={{
           name: 'Name',

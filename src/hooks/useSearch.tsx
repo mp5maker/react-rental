@@ -12,19 +12,19 @@ const useSearch = ({ data }: { data: Array<any> }) => {
     }: {
       properties: Array<string>
       search: string
-      isExact: boolean
+      isExact?: boolean
     }) => {
       if (search) {
-        const filteredResult = data.filter(item => {
+        const filteredResult = list.filter(item => {
           return properties.some((prop: string) => {
             const str = String(get(item, prop, ''))
-            return isExact ? str == search : str.includes(search)
+            return isExact ? str === search : str.toLowerCase().includes(search.toLowerCase())
           })
         })
         return setList(filteredResult)
       } else return setList(data)
     },
-    [list]
+    [list, data]
   )
 
   React.useEffect(() => {
