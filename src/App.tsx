@@ -11,12 +11,17 @@ const history = createBrowserHistory()
 
 function App() {
   const { loadData }: any = useRental()
-  const { setLocalStorage } = useLocalStorage()
+  const { setLocalStorage, getLocalStorage } = useLocalStorage()
 
   React.useEffect(() => {
-    setLocalStorage({ key: 'rental', value: DUMMY_DATA })
-    loadData({ value: DUMMY_DATA })
-  }, [loadData, setLocalStorage])
+    const dataLoaded = getLocalStorage({ key: 'rental' })
+    if (dataLoaded) {
+      loadData({ value: dataLoaded })
+    } else {
+      setLocalStorage({ key: 'rental', value: DUMMY_DATA })
+      loadData({ value: DUMMY_DATA })
+    }
+  }, [loadData, setLocalStorage, getLocalStorage])
 
   return (
     <Router history={history}>
