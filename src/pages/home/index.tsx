@@ -29,7 +29,8 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
     swal.fire({
       html: (
         <Book rentals={rentals} />
-      )
+      ),
+      showConfirmButton: false
     })
   }
 

@@ -3,6 +3,7 @@ import useSelect from '../../../hooks/useSelect'
 import bookSelect from '../../../utitlities/bookSelect'
 import Select from '../../select'
 import get from 'lodash/get'
+import DatePicker from '../../datepicker'
 import './book.scss'
 
 interface IBookProps {
@@ -36,7 +37,12 @@ const BookDetails = ({ item }: any): JSX.Element => {
 const Book: React.FC<IBookProps> = ({ rentals }): JSX.Element => {
   const { selected, handleSelect } = useSelect(rentals[0].code)
   const options = bookSelect({ data: rentals })
+  const [startDate, setStartDate] = React.useState<Date>(new Date())
+  const [endDate, setEndDate] = React.useState<Date>(new Date())
   const selectedObj = rentals.find(rental => get(rental, 'code', '') === selected)
+
+  const handleStartDate = (date: Date) => setStartDate(date)
+  const handleEndDate = (date: Date) => setEndDate(date)
 
   return (
     <div className={'book-container'}>
@@ -46,6 +52,20 @@ const Book: React.FC<IBookProps> = ({ rentals }): JSX.Element => {
       <div className={'book-content'}>
         <Select onChange={handleSelect} value={selected} options={options} />
         <BookDetails item={selectedObj} />
+      </div>
+      <div className={'book-footer'}>
+        <div className={'from-date'}>
+          <div>From: &nbsp;</div>
+          <div>
+            <DatePicker selected={startDate} onChange={handleStartDate} />
+          </div>
+        </div>
+        <div className={'to-date'}>
+          <div>To: &nbsp;</div>
+          <div>
+            <DatePicker selected={endDate} onChange={handleEndDate} />
+          </div>
+        </div>
       </div>
     </div>
   )

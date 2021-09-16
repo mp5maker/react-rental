@@ -5,4 +5,15 @@
   .book-content {
     text-align: left;
   }
+  .book-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .from-date, .to-date {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: row;
+    }
+  }
 }
