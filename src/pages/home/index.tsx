@@ -3,11 +3,15 @@ import Header from '../../components/header'
 import Table from '../../components/table'
 import useRental from '../../hooks/useRental'
 import isNil from 'lodash/isNil'
+import Footer from '../../components/footer'
 
 interface IHomeProps {}
 
 const Home: React.FC<IHomeProps> = (): JSX.Element => {
   const { rentals } = useRental()
+
+  const onBook = () => {}
+  const onReturn = () => {}
 
   return (
     <div className={'page-container home-container'}>
@@ -47,6 +51,7 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
           )
         }}
       />
+      <Footer onBook={onBook} onReturn={onReturn} />
     </div>
   )
 }

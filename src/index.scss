@@ -1,12 +1,19 @@
 :root {
-  --extraSmall: 0.25rem;
+  --extraSmallSpace: 0.25rem;
   --smallSpace: 0.5rem;
   --mediumSpace: 1rem;
   --largeSpace: 2rem;
   --extraLargeSpace: 3rem;
   --commonBorderRadius: 5px;
   --white: white;
+  --black: #212121;
   --lightgrey: rgb(239, 235, 235);
+  --primary: #689f38;
+  --secondary: #3f51b5;
+  --error: #f44336;
+  --warning: #ff9800;
+  --info: #2196f3;
+  --success: #81c784;
 }
 
 html, body {

@@ -1,0 +1,36 @@
+.button-container {
+  padding: var(--extraSmallSpace);
+  border: none;
+  box-shadow: unset;
+  outline: none;
+  cursor: pointer;
+  border-radius: var(--commonBorderRadius);
+  &.primary {
+    background-color: var(--primary);
+    color: var(--white);
+  }
+  &.secondary {
+    background-color: var(--secondary);
+    color: var(--white);
+  }
+  &.error {
+    background-color: var(--error);
+    color: var(--white);
+  }
+  &.warning {
+    background-color: var(--warning);
+    color: var(--white);
+  }
+  &.info {
+    background-color: var(--info);
+        color: var(--white);
+  }
+  &.success {
+    background-color: var(--info);
+    color: var(--white);
+  }
+  &.white {
+    background-color: var(--white);
+    color: var(--black);
+  }
+}
