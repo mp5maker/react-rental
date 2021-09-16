@@ -38,17 +38,20 @@ const Table = <T,>({
           <tr>
             {[...(serial ? ['id'] : []), ...properties].map((item, headerKey) => {
               const title: string = get(headerTitles, item, '') as string
-              if (item === 'id') {
-                return (
-                  <th key={`${generatedUUID}-${generator.next().value}-${headerKey}-${item}`}>
-                    ID
-                  </th>
-                )
-              }
               const space = get(columnSpacing, item, '')
               const thProps = {
                 ...(equallySpaced ? { width: `${Math.floor(100 / columns)}%` } : {}),
                 ...(space ? { width: space } : {})
+              }
+              if (item === 'id') {
+                return (
+                  <th
+                    key={`${generatedUUID}-${generator.next().value}-${headerKey}-${item}`}
+                    {...thProps}
+                  >
+                    ID
+                  </th>
+                )
               }
               return (
                 <th key={`${generatedUUID}-${generator.next().value}-${headerKey}`} {...thProps}>
@@ -63,17 +66,20 @@ const Table = <T,>({
             return (
               <tr key={`${generatedUUID}-${generator.next().value}-${rowKey}`}>
                 {[...(serial ? ['id'] : []), ...properties].map((column, columnKey) => {
-                  if (column === 'id')
-                    return (
-                      <td key={`${generatedUUID}-${generator.next().value}-${rowKey}-${columnKey}`}>
-                        {rowKey + 1}
-                      </td>
-                    )
                   const space = get(columnSpacing, column, '')
                   const tdProps = {
                     ...(equallySpaced ? { width: `${Math.floor(100 / columns)}%` } : {}),
                     ...(space ? { width: space } : {})
                   }
+                  if (column === 'id')
+                    return (
+                      <td
+                        key={`${generatedUUID}-${generator.next().value}-${rowKey}-${columnKey}`}
+                        {...tdProps}
+                      >
+                        {rowKey + 1}
+                      </td>
+                    )
                   return (
                     <td
                       key={`${generatedUUID}-${generator.next().value}-${rowKey}-${columnKey}`}
