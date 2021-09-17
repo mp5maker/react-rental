@@ -8,7 +8,7 @@
 
 ### 17 Sep 2021 ####
 
-* [7:44 AM - ] Started working again
+* [7:44 AM - 11:11 AM] Started working again
 
 #### Some Considerations (Due to shortage of time) ####
 * Avoided Using Webpack due to shortage of time
@@ -21,13 +21,4 @@
 
 #### Logic Considerations ####
 * There was no discount in the given data, so the logic for discount has been ignored
-* Meter estimation is not clear
-  10 miles will be added per day
-
-<!-- How days are calculated -->
-```javascript
-  const price = 20 // Assumed [Taked from data]
-  const usedMileage = 100 // Assumed
-  const days = 100 / 10    //10
-  const totalPrice = 10 * price // 200
-```
+* How return will be calculated is not clear
