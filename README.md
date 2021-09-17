@@ -1,16 +1,18 @@
-## Timeline ##
+#### Timeline ####
 
-#### 16 Sep 2021 ####
+> 16 Sep 2021
 
 * [9:30 AM] read the email
 * [2.40 PM - 3:45 PM] Initiated the react app in between work
 * [5:03 PM - 10:09] Started working again
 
-### 17 Sep 2021 ####
+> 17 Sep 2021
 
 * [7:44 AM - 11:11 AM] Started working again
+* [11:30 AM - ] Started working again
 
 #### Some Considerations (Due to shortage of time) ####
+
 * Avoided Using Webpack due to shortage of time
 * Avoided Using Next JS
 * Avoided creating a theme using Material UI
@@ -19,6 +21,15 @@
 * Avoided using unnessary libraries eg: Material UI
 
 
+#### Logic ####
+
+* Book select fields shows which are available
+* Return select fields shows which are not available
+* Booking will change the availability from true to false
+* Return will change the availability from false to true
+* Search field searches using ['code', 'name', 'type', 'durability', 'mileage']
+
 #### Logic Considerations ####
+
 * There was no discount in the given data, so the logic for discount has been ignored
 * The logic to calculate the total Price for the return product is not given
