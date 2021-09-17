@@ -17,10 +17,24 @@ Took 2 days due to my work schedule
 
 #### Libraries Used ####
 
+> For the App
+
 * date-fns
 * lodash
 * react-datepicker (Safari do not suppor type="date" for input field)
 * sweetalert2
+
+> Formatting
+
+* eslint
+* prettier (for formatting)
+
+> Testing
+
+* jest
+* @testing-library/react
+* @testing-library/jest-dom
+* @testing-library/
 
 #### Some Considerations (Due to shortage of time) ####
 
@@ -30,6 +44,7 @@ Took 2 days due to my work schedule
 * Avoided multiple language support
 * Avoided user accessibility
 * Avoided using unnessary libraries eg: Material UI
+* Avoided creating storybook
 
 
 #### Logic ####
