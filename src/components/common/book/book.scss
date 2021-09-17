@@ -16,4 +16,18 @@
       flex-direction: row;
     }
   }
+  .yes-no {
+    margin-top: var(--mediumSpace);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    div {
+      &:first-child {
+        margin-right: var(--mediumSpace);
+      }
+      button {
+        width: 100px;
+      }
+    }
+  }
 }

@@ -5,6 +5,7 @@ import Select from '../../select'
 import get from 'lodash/get'
 import DatePicker from '../../datepicker'
 import './book.scss'
+import Button, { BUTTON_COLOR_TYPE } from '../../button'
 
 interface IBookProps {
   rentals: Array<any>
@@ -19,7 +20,7 @@ const BookDetails = ({ item }: any): JSX.Element => {
   return (
     <div>
       <div>
-        <h4>Name: {name}</h4>
+        <p>Name: {name}</p>
       </div>
       <div>
         <p>Rental Period: {rentalPeriod}</p>
@@ -44,6 +45,9 @@ const Book: React.FC<IBookProps> = ({ rentals }): JSX.Element => {
   const handleStartDate = (date: Date) => setStartDate(date)
   const handleEndDate = (date: Date) => setEndDate(date)
 
+  const onClickYes = () => {}
+  const onClickNo = () => {}
+
   return (
     <div className={'book-container'}>
       <div className={'book-title'}>
@@ -67,6 +71,18 @@ const Book: React.FC<IBookProps> = ({ rentals }): JSX.Element => {
           </div>
         </div>
       </div>
+        <div className={'yes-no'}>
+          <div>
+            <Button onClick={onClickYes} color={BUTTON_COLOR_TYPE.success}>
+              <p>Yes</p>
+            </Button>
+          </div>
+          <div>
+            <Button onClick={onClickNo} color={BUTTON_COLOR_TYPE.error}>
+              <p>No</p>
+            </Button>
+          </div>
+        </div>
     </div>
   )
 }

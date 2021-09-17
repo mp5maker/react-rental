@@ -1,10 +1,15 @@
 .button-container {
-  padding: var(--extraSmallSpace);
+  padding: var(--smallSpace) var(--extraSmallSpace);
   border: none;
   box-shadow: unset;
   outline: none;
   cursor: pointer;
   border-radius: var(--commonBorderRadius);
+
+  & > p {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 
   &.filled {
     &.primary {
@@ -28,7 +33,7 @@
           color: var(--white);
     }
     &.success {
-      background-color: var(--info);
+      background-color: var(--success);
       color: var(--white);
     }
     &.white {
@@ -63,14 +68,14 @@
       color: var(--info);
     }
     &.success {
-      border: 1px solid var(--info);
+      border: 1px solid var(--success);
       background-color: var(--white);
-      color: var(--info);
+      color: var(--success);
     }
     &.white {
-      border: 1px solid var(--white);
+      border: 1px solid var(--black);
       background-color: var(--white);
-      color: var(--white);
+      color: var(--black);
     }
   }
 }
