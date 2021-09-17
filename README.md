@@ -46,6 +46,8 @@ Took 2 days due to my work schedule
 * Avoided using unnessary libraries eg: Material UI
 * Avoided creating storybook
 * Avoided Circle CI integration
+* Avoided creating a common import for tests / mocks
+* Avoided creating separate mock folders for the test
 
 
 #### Logic ####
