@@ -1,7 +1,7 @@
 import get from 'lodash/get'
 import * as React from 'react'
 import useSelect from '../../../hooks/useSelect'
-import bookSelect from '../../../utitlities/bookSelect'
+import productSelect from '../../../utitlities/productSelect'
 import Button, { BUTTON_COLOR_TYPE } from '../../button'
 import Select from '../../select'
 import TextField from '../../textField'
@@ -30,7 +30,7 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
   const { selected, handleSelect } = useSelect(
     rentals.filter(item => get(item, 'availability', false) === false)[0].code
   )
-  const options = bookSelect({ data: rentals, availability: false })
+  const options = productSelect({ data: rentals, availability: false })
   const selectedObj = rentals.find(rental => get(rental, 'code', '') === selected)
   const price = get(selectedObj, 'price', 0)
 

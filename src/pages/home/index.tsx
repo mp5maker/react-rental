@@ -56,9 +56,25 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
 
   const onReturn = () => {
     const onNo = () => swal.clickCancel()
+    const onConfirm = ({ item, usedMileage }: any) => {
+      const itemCode = get(item, 'code', '')
+      const modifiedRentals = rentals.map((rental: any) => {
+        const rentalCode = get(rental, 'code', '')
+        if (rentalCode === itemCode) {
+          return {
+            ...rental,
+            availability: true
+          }
+        }
+        return rental
+      })
+      setLocalStorage({ key: LOCAL_STORAGE_KEY.RENTAL, value: modifiedRentals })
+      loadData({ value: modifiedRentals })
+      swal.clickConfirm()
+    }
 
     swal.fire({
-      html: <ReturnProduct rentals={rentals} onNo={onNo} />,
+      html: <ReturnProduct rentals={rentals} onNo={onNo} onConfirm={onConfirm} />,
       showConfirmButton: false
     })
   }

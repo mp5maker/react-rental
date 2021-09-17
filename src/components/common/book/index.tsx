@@ -1,6 +1,6 @@
 import * as React from 'react'
 import useSelect from '../../../hooks/useSelect'
-import bookSelect from '../../../utitlities/bookSelect'
+import productSelect from '../../../utitlities/productSelect'
 import Select from '../../select'
 import get from 'lodash/get'
 import DatePicker from '../../datepicker'
@@ -25,7 +25,7 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
   const { selected, handleSelect } = useSelect(
     rentals.filter(item => get(item, 'availability', false) === true)[0].code
   )
-  const options = bookSelect({ data: rentals, availability: true })
+  const options = productSelect({ data: rentals, availability: true })
   const [startDate, setStartDate] = React.useState<Date>(new Date())
   const [endDate, setEndDate] = React.useState<Date>(new Date())
   const selectedObj = rentals.find(rental => get(rental, 'code', '') === selected)

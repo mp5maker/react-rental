@@ -1,6 +1,6 @@
 import get from 'lodash/get'
 
-const bookSelect = ({ data, availability = true }: { data: Array<any>, availability?: boolean }) =>
+const productSelect = ({ data, availability = true }: { data: Array<any>, availability?: boolean }) =>
   data.filter((item) => get(item, 'availability', false) === availability).map(item => {
     const name = get(item, 'name', '')
     const code = get(item, 'code', '')
@@ -12,4 +12,4 @@ const bookSelect = ({ data, availability = true }: { data: Array<any>, availabil
     }
   })
 
-export default bookSelect
+export default productSelect

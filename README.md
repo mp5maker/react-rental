@@ -17,3 +17,17 @@
 * Avoided multiple language support
 * Avoided user accessibility
 * Avoided using unnessary libraries eg: Material UI
+
+
+#### Logic Considerations ####
+* There was no discount in the given data, so the logic for discount has been ignored
+* Meter estimation is not clear
+  10 miles will be added per day
+
+<!-- How days are calculated -->
+```javascript
+  const price = 20 // Assumed [Taked from data]
+  const usedMileage = 100 // Assumed
+  const days = 100 / 10    //10
+  const totalPrice = 10 * price // 200
+```
