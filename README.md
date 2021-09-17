@@ -11,6 +11,13 @@
 * [7:44 AM - 11:11 AM] Started working again
 * [11:30 AM - ] Started working again
 
+#### Libraries Used ####
+
+* date-fns
+* lodash
+* react-datepicker (Safari do not suppor type="date" for input field)
+* sweetalert2
+
 #### Some Considerations (Due to shortage of time) ####
 
 * Avoided Using Webpack due to shortage of time

@@ -6,6 +6,7 @@ import Button, { BUTTON_COLOR_TYPE } from '../../button'
 import Select from '../../select'
 import TextField from '../../textField'
 import ProductDetails from '../productDetails'
+import '../productContainer.scss'
 import './returnProduct.scss'
 
 interface IReturnProductProps {
@@ -56,15 +57,15 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
   }
 
   const DefaultScreenContent = (
-    <div className={'book-container'}>
-      <div className={'book-title'}>
+    <div className={'return-product-container'}>
+      <div className={'return-product-title'}>
         <h3>Book a product</h3>
       </div>
-      <div className={'book-content'}>
+      <div className={'return-product-content'}>
         <Select onChange={handleSelect} value={selected} options={options} />
         <ProductDetails item={selectedObj} />
       </div>
-      <div className={'book-footer'}>
+      <div className={'return-product-footer'}>
         <TextField
           value={usedMileage}
           onChange={onChangeMileage}
@@ -88,11 +89,11 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
   )
 
   const CalculationScreenContent = (
-    <div className={'book-container'}>
-      <div className={'book-title'}>
+    <div className={'return-product-container'}>
+      <div className={'return-product-title'}>
         <h3>Return a product</h3>
       </div>
-      <div className={'book-content'}>
+      <div className={'return-product-content'}>
         <p>Your total price is ${totalPrice}</p>
         <p>Do you want to proceed ?</p>
       </div>

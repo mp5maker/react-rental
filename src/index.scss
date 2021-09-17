@@ -16,6 +16,15 @@
   --success: #81c784;
 }
 
+$colors: (
+  "primary": var(--primary),
+  "secondary": var(--secondary),
+  "info": var(--info),
+  "error": var(--error),
+  "success": var(--success),
+  "warning": var(---warning)
+);
+
 html, body {
   margin: 0;
   padding: 0;
@@ -40,4 +49,13 @@ code {
 
 .page-container {
   padding: var(--largeSpace);
+}
+
+@each $name, $color in $colors {
+  .#{$name}-text {
+    color: $color;
+  }
+  .#{$name}-background {
+    background-color: $color;
+  }
 }

@@ -6,6 +6,7 @@ import get from 'lodash/get'
 import DatePicker from '../../datepicker'
 import Button, { BUTTON_COLOR_TYPE } from '../../button'
 import differenceInDays from 'date-fns/differenceInDays'
+import format from 'date-fns/format'
 import ProductDetails from '../productDetails'
 import './book.scss'
 
@@ -32,10 +33,19 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
   const rentalPeriod = get(selectedObj, 'minimum_rent_period', 0)
   const price = get(selectedObj, 'price', 0)
   const [estimatedPrice, setEstimatedPrice] = React.useState<number>(0)
+  const [error, setError] = React.useState<string>('')
 
-  const handleStartDate = (date: Date) => setStartDate(date)
-  const handleEndDate = (date: Date) => setEndDate(date)
-  const differenceDate = differenceInDays(endDate, startDate) + 1
+  const handleStartDate = (date: Date) => {
+    setError('')
+    setStartDate(date)
+  }
+  const handleEndDate = (date: Date) => {
+    setError('')
+    setEndDate(date)
+  }
+  const differenceDate =
+    differenceInDays(endDate, startDate) +
+    (format(startDate, 'yyyyMMdd') === format(endDate, 'yyyyMMdd') ? 0 : 1)
   const isValidDifferenceDate = differenceDate >= rentalPeriod
 
   const onClickConfirm = () => {
@@ -47,7 +57,7 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
       setEstimatedPrice(differenceDate * price)
       setScreenIndex(MODAL_SCREEN.CALCULATION)
     } else {
-      console.log('not ok')
+      setError(`The rental period needs to be at least ${rentalPeriod} day`)
     }
   }
 
@@ -78,6 +88,9 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
           </div>
         </div>
       </div>
+      <div className={'book-content'}>
+        <p className={'error-text'}>{error}</p>
+      </div>
       <div className={'yes-no'}>
         <div>
           <Button onClick={onClickYes} color={BUTTON_COLOR_TYPE.success}>
@@ -98,7 +111,7 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
       <div className={'book-title'}>
         <h3>Book a product</h3>
       </div>
-      <div className={'book-content'}>
+      <div className={'book-content-alt'}>
         <p>Your estimated price is ${estimatedPrice}</p>
         <p>Do you want to proceed ?</p>
       </div>
