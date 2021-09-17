@@ -45,6 +45,7 @@ Took 2 days due to my work schedule
 * Avoided user accessibility
 * Avoided using unnessary libraries eg: Material UI
 * Avoided creating storybook
+* Avoided Circle CI integration
 
 
 #### Logic ####

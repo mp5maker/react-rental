@@ -19,6 +19,7 @@ export enum BUTTON_VARIANT {
 type TButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
   color?: BUTTON_COLOR_TYPE
   variant?: BUTTON_VARIANT
+  disabled?: boolean
 }
 
 const Button: React.FC<TButtonProps> = ({

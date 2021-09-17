@@ -62,6 +62,10 @@ describe('Check the function of the productSelect', () => {
     const list = productSelect({ data, availability: false })
     expect(list).toEqual(notAvailable)
   })
+  it('should not exist [not available] list', () => {
+    const list = productSelect({ data, availability: false })
+    expect(list[3]).not.toBeDefined()
+  })
   it('should show list of [available] list', () => {
     const list = productSelect({ data, availability: true })
     expect(list).toEqual(available)
