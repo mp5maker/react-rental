@@ -3,12 +3,12 @@ const initialState = {
 }
 
 enum ACTION_TYPES {
-  'INITIAL' = 'INITIAL'
+  INITIAL = 'INITIAL'
 }
 
 const reducer = (
   state = initialState,
-  action: { type: ACTION_TYPES.INITIAL; [x: string]: any }
+  action: { type: ACTION_TYPES; [x: string]: any }
 ) => {
   const { type, value } = action
 

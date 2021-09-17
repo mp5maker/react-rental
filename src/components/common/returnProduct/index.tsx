@@ -4,25 +4,18 @@ import bookSelect from '../../../utitlities/bookSelect'
 import Select from '../../select'
 import get from 'lodash/get'
 import DatePicker from '../../datepicker'
-import './book.scss'
+import './returnProduct.scss'
 import Button, { BUTTON_COLOR_TYPE } from '../../button'
-import differenceInDays from 'date-fns/differenceInDays'
 
-interface IBookProps {
+interface IReturnProductProps {
   rentals: Array<any>
-  onNo?: (params: any) => void | any
-  onConfirm?: (params: any) => void | any
+  onNo?: ((params: any) => void | any)
 }
 
-enum MODAL_SCREEN {
-  DEFAULT = 1,
-  CALCUALTION =  2
-}
-
-const BookDetails = ({ item }: any): JSX.Element => {
+const ReturnProductDetails = ({ item }: any): JSX.Element => {
   const name = get(item, 'name', '')
   const rentalPeriod = get(item, 'minimum_rent_period', '')
-  const mileage = get(item, 'mileage', 'N/A') || 'N/A'
+  const mileage = get(item, 'mileage', 'N/A')
   const needing_repair = get(item, 'needing_repair', false) ? 'Yes' : 'No'
 
   return (
@@ -43,47 +36,29 @@ const BookDetails = ({ item }: any): JSX.Element => {
   )
 }
 
-const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element => {
-  const [screenIndex, setScreenIndex] = React.useState<MODAL_SCREEN>(MODAL_SCREEN.DEFAULT)
+const ReturnProduct: React.FC<IReturnProductProps> = ({ rentals, onNo }): JSX.Element => {
   const { selected, handleSelect } = useSelect(rentals[0].code)
-  const options = bookSelect({ data: rentals, availability: true })
+  const options = bookSelect({ data: rentals, availability: false })
   const [startDate, setStartDate] = React.useState<Date>(new Date())
   const [endDate, setEndDate] = React.useState<Date>(new Date())
   const selectedObj = rentals.find(rental => get(rental, 'code', '') === selected)
-  const rentalPeriod = get(selectedObj, 'minimum_rent_period', 0)
-  const price = get(selectedObj, 'price', 0)
-  const [estimatedPrice, setEstimatedPrice] = React.useState<number>(0)
 
   const handleStartDate = (date: Date) => setStartDate(date)
   const handleEndDate = (date: Date) => setEndDate(date)
-  const differenceDate = differenceInDays(endDate, startDate) + 1
-  const isValidDifferenceDate = differenceDate >= rentalPeriod
 
-  const onClickConfirm = () => {
-    if (onConfirm) onConfirm({ item: selectedObj, estimatedPrice, differenceDate })
-  }
-
-  const onClickYes = () => {
-    if (isValidDifferenceDate) {
-      setEstimatedPrice(differenceDate * price)
-      setScreenIndex(MODAL_SCREEN.CALCUALTION)
-    } else {
-      console.log('not ok')
-    }
-  }
-
+  const onClickYes = () => {}
   const onClickNo = () => {
     if (onNo) onNo({})
   }
 
-  const DefaultScreenContent = (
+  return (
     <div className={'book-container'}>
       <div className={'book-title'}>
         <h3>Book a product</h3>
       </div>
       <div className={'book-content'}>
         <Select onChange={handleSelect} value={selected} options={options} />
-        <BookDetails item={selectedObj} />
+        <ReturnProductDetails item={selectedObj} />
       </div>
       <div className={'book-footer'}>
         <div className={'from-date'}>
@@ -113,28 +88,6 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
       </div>
     </div>
   )
-
-  const CalculationScreenContent = (
-    <div className={'book-container'}>
-      <div className={'book-title'}>
-        <h3>Book a product</h3>
-      </div>
-      <div className={'book-content'}>
-        <p>Your estimated price is ${estimatedPrice}</p>
-      </div>
-      <div className={'yes-no'}>
-        <div>
-          <Button onClick={onClickConfirm} color={BUTTON_COLOR_TYPE.success}>
-            <p>Confirm</p>
-          </Button>
-        </div>
-      </div>
-    </div>
-  )
-
-  if (screenIndex === MODAL_SCREEN.DEFAULT) return DefaultScreenContent
-  if (screenIndex === MODAL_SCREEN.CALCUALTION) return CalculationScreenContent
-  return <></>
 }
 
-export default Book
+export default ReturnProduct

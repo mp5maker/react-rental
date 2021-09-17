@@ -8,13 +8,17 @@ import swal from '../../utitlities/swal'
 import get from 'lodash/get'
 import useSearch from '../../hooks/useSearch'
 import Book from '../../components/common/book'
+import ReturnProduct from '../../components/common/returnProduct'
+import useLocalStorage from '../../hooks/useLocalStorage'
+import { LOCAL_STORAGE_KEY } from '../../constants/settings'
 
 interface IHomeProps {}
 
 const Home: React.FC<IHomeProps> = (): JSX.Element => {
-  const { rentals } = useRental()
+  const { rentals, loadData } = useRental()
   const { list, search } = useSearch({ data: rentals })
   const [searchText, setSearchText] = React.useState<string>('')
+  const { setLocalStorage } = useLocalStorage()
 
   const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = get(event, 'target.value', '')
@@ -26,17 +30,36 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
   }
 
   const onBook = () => {
+    const onNo = () => swal.clickCancel()
+    const onConfirm = ({ item }: any) => {
+      const itemCode = get(item, 'code', '')
+      const modifiedRentals = rentals.map((rental: any) => {
+        const rentalCode = get(rental, 'code', '')
+        if (rentalCode === itemCode) {
+          return {
+            ...rental,
+            availability: false
+          }
+        }
+        return rental
+      })
+      setLocalStorage({ key: LOCAL_STORAGE_KEY.RENTAL, value: modifiedRentals })
+      loadData({ value: modifiedRentals })
+      swal.clickConfirm()
+    }
+
     swal.fire({
-      html: (
-        <Book rentals={rentals} />
-      ),
+      html: <Book rentals={rentals} onNo={onNo} onConfirm={onConfirm} />,
       showConfirmButton: false
     })
   }
 
   const onReturn = () => {
+    const onNo = () => swal.clickCancel()
+
     swal.fire({
-      html: <div>Return in progress</div>
+      html: <ReturnProduct rentals={rentals} onNo={onNo} />,
+      showConfirmButton: false
     })
   }
 
