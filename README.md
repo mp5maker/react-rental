@@ -1,5 +1,9 @@
 #### Timeline ####
 
+Deadline was within a days
+Extended my deadline
+Took 2 days due to my work schedule
+
 > 16 Sep 2021
 
 * [9:30 AM] read the email
@@ -40,3 +44,17 @@
 
 * There was no discount in the given data, so the logic for discount has been ignored
 * The logic to calculate the total Price for the return product is not given
+
+#### Calculation Logic ####
+
+> For Booking (Estimate Price)
+
+```javascript
+const estimatePrice = totalDayOfWork * price
+```
+
+> For Returning (Total Price)
+
+```javascript
+const totalPrice = minimum_rent_period * price
+```
