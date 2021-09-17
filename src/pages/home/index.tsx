@@ -12,6 +12,7 @@ import ReturnProduct from '../../components/common/returnProduct'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import durabilityCalculation from '../../utitlities/durabilityCalculation'
 import { LOCAL_STORAGE_KEY } from '../../constants/settings'
+import NoDataFound from '../../components/noDataFound'
 
 interface IHomeProps {}
 
@@ -89,6 +90,7 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
       <Header onChangeSearch={onChangeSearch} searchText={searchText} />
       <Table
         data={list}
+        noDataComponent={<NoDataFound />}
         properties={['name', 'code', 'availability', 'needing_repair', 'durability', 'mileage']}
         headerTitles={{
           name: 'Name',

@@ -14,6 +14,7 @@ interface ITableProps<T> {
   equallySpaced?: boolean
   customHeader?: ({ title, property }: any) => string | React.ReactNode
   customBody: ({ row, column }: any) => string | React.ReactNode
+  noDataComponent?: React.ReactNode
 }
 
 const generatedUUID = v4()
@@ -27,7 +28,8 @@ const Table = <T,>({
   columnSpacing = {},
   equallySpaced = false,
   customHeader,
-  customBody
+  customBody,
+  noDataComponent
 }: ITableProps<T>) => {
   const columns = properties.length + (serial ? 1 : 0)
 
@@ -62,36 +64,42 @@ const Table = <T,>({
           </tr>
         </thead>
         <tbody>
-          {data.map((row, rowKey) => {
-            return (
-              <tr key={`${generatedUUID}-${generator.next().value}-${rowKey}`}>
-                {[...(serial ? ['id'] : []), ...properties].map((column, columnKey) => {
-                  const space = get(columnSpacing, column, '')
-                  const tdProps = {
-                    ...(equallySpaced ? { width: `${Math.floor(100 / columns)}%` } : {}),
-                    ...(space ? { width: space } : {})
-                  }
-                  if (column === 'id')
+          {data.length ? (
+            data.map((row, rowKey) => {
+              return (
+                <tr key={`${generatedUUID}-${generator.next().value}-${rowKey}`}>
+                  {[...(serial ? ['id'] : []), ...properties].map((column, columnKey) => {
+                    const space = get(columnSpacing, column, '')
+                    const tdProps = {
+                      ...(equallySpaced ? { width: `${Math.floor(100 / columns)}%` } : {}),
+                      ...(space ? { width: space } : {})
+                    }
+                    if (column === 'id')
+                      return (
+                        <td
+                          key={`${generatedUUID}-${generator.next().value}-${rowKey}-${columnKey}`}
+                          {...tdProps}
+                        >
+                          {rowKey + 1}
+                        </td>
+                      )
                     return (
                       <td
                         key={`${generatedUUID}-${generator.next().value}-${rowKey}-${columnKey}`}
                         {...tdProps}
                       >
-                        {rowKey + 1}
+                        {customBody ? customBody({ column, row }) : <></>}
                       </td>
                     )
-                  return (
-                    <td
-                      key={`${generatedUUID}-${generator.next().value}-${rowKey}-${columnKey}`}
-                      {...tdProps}
-                    >
-                      {customBody ? customBody({ column, row }) : <></>}
-                    </td>
-                  )
-                })}
-              </tr>
-            )
-          })}
+                  })}
+                </tr>
+              )
+            })
+          ) : (
+            <tr>
+              <td colSpan={columns}>{noDataComponent ? noDataComponent : <></>}</td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
