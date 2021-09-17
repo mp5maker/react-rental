@@ -1,79 +1,57 @@
+import get from 'lodash/get'
 import * as React from 'react'
 import useSelect from '../../../hooks/useSelect'
 import bookSelect from '../../../utitlities/bookSelect'
-import Select from '../../select'
-import get from 'lodash/get'
-import DatePicker from '../../datepicker'
-import './returnProduct.scss'
 import Button, { BUTTON_COLOR_TYPE } from '../../button'
+import Select from '../../select'
+import ProductDetails from '../productDetails'
+import './returnProduct.scss'
 
 interface IReturnProductProps {
   rentals: Array<any>
-  onNo?: ((params: any) => void | any)
+  onNo?: (params: any) => void | any
+  onConfirm?: (params: any) => void | any
 }
 
-const ReturnProductDetails = ({ item }: any): JSX.Element => {
-  const name = get(item, 'name', '')
-  const rentalPeriod = get(item, 'minimum_rent_period', '')
-  const mileage = get(item, 'mileage', 'N/A')
-  const needing_repair = get(item, 'needing_repair', false) ? 'Yes' : 'No'
+enum MODAL_SCREEN {
+  DEFAULT = 1,
+  CALCULATION = 2
+}
 
-  return (
-    <div>
-      <div>
-        <p>Name: {name}</p>
-      </div>
-      <div>
-        <p>Rental Period: {rentalPeriod}</p>
-      </div>
-      <div>
-        <p>Mileage: {mileage}</p>
-      </div>
-      <div>
-        <p>Repair Needed: {needing_repair}</p>
-      </div>
-    </div>
+const ReturnProduct: React.FC<IReturnProductProps> = ({
+  rentals,
+  onNo,
+  onConfirm
+}): JSX.Element => {
+  const [screenIndex, setScreenIndex] = React.useState<MODAL_SCREEN>(MODAL_SCREEN.DEFAULT)
+  const { selected, handleSelect } = useSelect(
+    rentals.filter(item => get(item, 'availability', false) === false)[0].code
   )
-}
-
-const ReturnProduct: React.FC<IReturnProductProps> = ({ rentals, onNo }): JSX.Element => {
-  const { selected, handleSelect } = useSelect(rentals[0].code)
   const options = bookSelect({ data: rentals, availability: false })
-  const [startDate, setStartDate] = React.useState<Date>(new Date())
-  const [endDate, setEndDate] = React.useState<Date>(new Date())
   const selectedObj = rentals.find(rental => get(rental, 'code', '') === selected)
 
-  const handleStartDate = (date: Date) => setStartDate(date)
-  const handleEndDate = (date: Date) => setEndDate(date)
+  const onClickConfirm = () => {
+    if (onConfirm) onConfirm({ item: selectedObj })
+  }
 
-  const onClickYes = () => {}
+  const onClickYes = () => {
+    setScreenIndex(MODAL_SCREEN.CALCULATION)
+  }
+
   const onClickNo = () => {
     if (onNo) onNo({})
   }
 
-  return (
+  const DefaultScreenContent = (
     <div className={'book-container'}>
       <div className={'book-title'}>
         <h3>Book a product</h3>
       </div>
       <div className={'book-content'}>
         <Select onChange={handleSelect} value={selected} options={options} />
-        <ReturnProductDetails item={selectedObj} />
+        <ProductDetails item={selectedObj} />
       </div>
-      <div className={'book-footer'}>
-        <div className={'from-date'}>
-          <div>From: &nbsp;</div>
-          <div>
-            <DatePicker selected={startDate} onChange={handleStartDate} />
-          </div>
-        </div>
-        <div className={'to-date'}>
-          <div>To: &nbsp;</div>
-          <div>
-            <DatePicker selected={endDate} onChange={handleEndDate} />
-          </div>
-        </div>
-      </div>
+      <div className={'book-footer'}></div>
       <div className={'yes-no'}>
         <div>
           <Button onClick={onClickYes} color={BUTTON_COLOR_TYPE.success}>
@@ -88,6 +66,28 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({ rentals, onNo }): JSX.El
       </div>
     </div>
   )
+
+  const CalculationScreenContent = (
+    <div className={'book-container'}>
+      <div className={'book-title'}>
+        <h3>Book a product</h3>
+      </div>
+      <div className={'book-content'}>
+        <p>Your estimated price is $</p>
+      </div>
+      <div className={'yes-no'}>
+        <div>
+          <Button onClick={onClickConfirm} color={BUTTON_COLOR_TYPE.success}>
+            <p>Confirm</p>
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+
+  if (screenIndex === MODAL_SCREEN.DEFAULT) return DefaultScreenContent
+  if (screenIndex === MODAL_SCREEN.CALCULATION) return CalculationScreenContent
+  return <></>
 }
 
 export default ReturnProduct

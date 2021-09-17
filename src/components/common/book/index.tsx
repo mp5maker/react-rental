@@ -4,9 +4,10 @@ import bookSelect from '../../../utitlities/bookSelect'
 import Select from '../../select'
 import get from 'lodash/get'
 import DatePicker from '../../datepicker'
-import './book.scss'
 import Button, { BUTTON_COLOR_TYPE } from '../../button'
 import differenceInDays from 'date-fns/differenceInDays'
+import ProductDetails from '../productDetails'
+import './book.scss'
 
 interface IBookProps {
   rentals: Array<any>
@@ -16,36 +17,14 @@ interface IBookProps {
 
 enum MODAL_SCREEN {
   DEFAULT = 1,
-  CALCUALTION =  2
-}
-
-const BookDetails = ({ item }: any): JSX.Element => {
-  const name = get(item, 'name', '')
-  const rentalPeriod = get(item, 'minimum_rent_period', '')
-  const mileage = get(item, 'mileage', 'N/A') || 'N/A'
-  const needing_repair = get(item, 'needing_repair', false) ? 'Yes' : 'No'
-
-  return (
-    <div>
-      <div>
-        <p>Name: {name}</p>
-      </div>
-      <div>
-        <p>Rental Period: {rentalPeriod}</p>
-      </div>
-      <div>
-        <p>Mileage: {mileage}</p>
-      </div>
-      <div>
-        <p>Repair Needed: {needing_repair}</p>
-      </div>
-    </div>
-  )
+  CALCULATION = 2
 }
 
 const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element => {
   const [screenIndex, setScreenIndex] = React.useState<MODAL_SCREEN>(MODAL_SCREEN.DEFAULT)
-  const { selected, handleSelect } = useSelect(rentals[0].code)
+  const { selected, handleSelect } = useSelect(
+    rentals.filter(item => get(item, 'availability', false) === true)[0].code
+  )
   const options = bookSelect({ data: rentals, availability: true })
   const [startDate, setStartDate] = React.useState<Date>(new Date())
   const [endDate, setEndDate] = React.useState<Date>(new Date())
@@ -66,7 +45,7 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
   const onClickYes = () => {
     if (isValidDifferenceDate) {
       setEstimatedPrice(differenceDate * price)
-      setScreenIndex(MODAL_SCREEN.CALCUALTION)
+      setScreenIndex(MODAL_SCREEN.CALCULATION)
     } else {
       console.log('not ok')
     }
@@ -83,7 +62,7 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
       </div>
       <div className={'book-content'}>
         <Select onChange={handleSelect} value={selected} options={options} />
-        <BookDetails item={selectedObj} />
+        <ProductDetails item={selectedObj} />
       </div>
       <div className={'book-footer'}>
         <div className={'from-date'}>
@@ -133,7 +112,7 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
   )
 
   if (screenIndex === MODAL_SCREEN.DEFAULT) return DefaultScreenContent
-  if (screenIndex === MODAL_SCREEN.CALCUALTION) return CalculationScreenContent
+  if (screenIndex === MODAL_SCREEN.CALCULATION) return CalculationScreenContent
   return <></>
 }
 
