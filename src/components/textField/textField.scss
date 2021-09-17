@@ -1,4 +1,8 @@
 input {
-  padding: var(--extraSmallSpace);
+  box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.12);
+  padding: var(--smallSpace) var(--extraSmallSpace);
   border-radius: var(--commonBorderRadius);
+  &:focus, &:hover {
+    box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.2);
+  }
 }
