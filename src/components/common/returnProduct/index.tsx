@@ -4,6 +4,7 @@ import useSelect from '../../../hooks/useSelect'
 import bookSelect from '../../../utitlities/bookSelect'
 import Button, { BUTTON_COLOR_TYPE } from '../../button'
 import Select from '../../select'
+import TextField from '../../textField'
 import ProductDetails from '../productDetails'
 import './returnProduct.scss'
 
@@ -24,14 +25,23 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
   onConfirm
 }): JSX.Element => {
   const [screenIndex, setScreenIndex] = React.useState<MODAL_SCREEN>(MODAL_SCREEN.DEFAULT)
+  const [usedMileage, setUsedMileage] = React.useState<string>('')
+  const [totalPrice, setTotalPrice] = React.useState<number>(0)
   const { selected, handleSelect } = useSelect(
     rentals.filter(item => get(item, 'availability', false) === false)[0].code
   )
   const options = bookSelect({ data: rentals, availability: false })
   const selectedObj = rentals.find(rental => get(rental, 'code', '') === selected)
+  const price = get(selectedObj, 'price', 0)
+
+  const onChangeMileage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = get(event, 'target.value', 0)
+    setTotalPrice(Math.ceil(parseInt(value, 10) / 10) * price)
+    setUsedMileage(value)
+  }
 
   const onClickConfirm = () => {
-    if (onConfirm) onConfirm({ item: selectedObj })
+    if (onConfirm) onConfirm({ item: selectedObj, usedMileage, totalPrice })
   }
 
   const onClickYes = () => {
@@ -51,7 +61,14 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
         <Select onChange={handleSelect} value={selected} options={options} />
         <ProductDetails item={selectedObj} />
       </div>
-      <div className={'book-footer'}></div>
+      <div className={'book-footer'}>
+        <TextField
+          value={usedMileage}
+          onChange={onChangeMileage}
+          type={'number'}
+          placeholder={'Used Mileage'}
+        />
+      </div>
       <div className={'yes-no'}>
         <div>
           <Button onClick={onClickYes} color={BUTTON_COLOR_TYPE.success}>
@@ -73,7 +90,7 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
         <h3>Book a product</h3>
       </div>
       <div className={'book-content'}>
-        <p>Your estimated price is $</p>
+        <p>Your estimated price is ${totalPrice}</p>
       </div>
       <div className={'yes-no'}>
         <div>

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Search from '../search'
+import TextField from '../textField'
 import './header.scss'
 
 interface IHeaderProps {
@@ -14,7 +14,7 @@ const Header: React.FC<IHeaderProps> = ({ searchText, onChangeSearch }): JSX.Ele
         <h2>Rental</h2>
       </div>
       <div className={'header-right'}>
-        <Search onChange={onChangeSearch} value={searchText} placeholder={'Search'} />
+        <TextField onChange={onChangeSearch} value={searchText} placeholder={'Search'} />
       </div>
     </div>
   )
