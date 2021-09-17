@@ -13,7 +13,7 @@ Took 2 days due to my work schedule
 > 17 Sep 2021
 
 * [7:44 AM - 11:11 AM] Started working again
-* [11:30 AM - 3:10] Started working again
+* [11:30 AM - 3:12] Completed
 
 #### Libraries Used ####
 
@@ -49,6 +49,7 @@ Took 2 days due to my work schedule
 * Avoided creating a common import for tests / mocks
 * Avoided creating separate mock folders for the test
 * More tests can be written, Added only few of them
+* Avoided few SEO tasks with meta tags
 
 
 #### Logic ####
