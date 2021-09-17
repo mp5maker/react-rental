@@ -47,4 +47,52 @@
       }
     }
   }
+  @media screen and (max-width: 767px) {
+    table {
+      display: block;
+      thead {
+        display: none;
+      }
+      tbody {
+        display: block;
+        tr {
+          display: block;
+          margin-bottom: var(--mediumSpace);
+          border-radius: var(--commonBorderRadius);
+          box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.12);
+          &:hover {
+            box-shadow: 0 1px 15px 0 rgba(0, 0, 0, 0.2);
+          }
+          td {
+            display: block;
+            text-align: right;
+            width: unset;
+            p {
+              margin-top: 0;
+              margin-bottom: 0;
+            }
+            &:first-child {
+              padding-left: 0;
+              padding: var(--smallSpace);
+            }
+            &:last-child {
+              padding-right: 0;
+              padding: var(--smallSpace);
+            }
+            &:before {
+              content: attr(data-header);
+              float: left;
+              position: relative;
+            }
+            padding: var(--smallSpace);
+          }
+          &::before, &::after {
+            clear: both;
+            content: "";
+            display: block;
+          }
+        }
+      }
+    }
+  }
 }

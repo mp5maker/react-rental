@@ -77,6 +77,7 @@ const Table = <T,>({
                     if (column === 'id')
                       return (
                         <td
+                          data-header={'ID'}
                           key={`${generatedUUID}-${generator.next().value}-${rowKey}-${columnKey}`}
                           {...tdProps}
                         >
@@ -85,6 +86,7 @@ const Table = <T,>({
                       )
                     return (
                       <td
+                        data-header={get(headerTitles, column, '')}
                         key={`${generatedUUID}-${generator.next().value}-${rowKey}-${columnKey}`}
                         {...tdProps}
                       >
