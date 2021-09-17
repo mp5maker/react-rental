@@ -5,32 +5,72 @@
   outline: none;
   cursor: pointer;
   border-radius: var(--commonBorderRadius);
-  &.primary {
-    background-color: var(--primary);
-    color: var(--white);
+
+  &.filled {
+    &.primary {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+    &.secondary {
+      background-color: var(--secondary);
+      color: var(--white);
+    }
+    &.error {
+      background-color: var(--error);
+      color: var(--white);
+    }
+    &.warning {
+      background-color: var(--warning);
+      color: var(--white);
+    }
+    &.info {
+      background-color: var(--info);
+          color: var(--white);
+    }
+    &.success {
+      background-color: var(--info);
+      color: var(--white);
+    }
+    &.white {
+      background-color: var(--white);
+      color: var(--black);
+    }
   }
-  &.secondary {
-    background-color: var(--secondary);
-    color: var(--white);
-  }
-  &.error {
-    background-color: var(--error);
-    color: var(--white);
-  }
-  &.warning {
-    background-color: var(--warning);
-    color: var(--white);
-  }
-  &.info {
-    background-color: var(--info);
-        color: var(--white);
-  }
-  &.success {
-    background-color: var(--info);
-    color: var(--white);
-  }
-  &.white {
-    background-color: var(--white);
-    color: var(--black);
+  &.outline {
+    &.primary {
+      border: 1px solid var(--primary);
+      background-color: var(--white);
+      color: var(--primary);
+    }
+    &.secondary {
+      border: 1px solid var(--secondary);
+      background-color: var(--white);
+      color: var(--secondary);
+    }
+    &.error {
+      border: 1px solid var(--error);
+      background-color: var(--white);
+      color: var(--error);
+    }
+    &.warning {
+      border: 1px solid var(--warning);
+      background-color: var(--white);
+      color: var(--warning);
+    }
+    &.info {
+      border: 1px solid var(--info);
+      background-color: var(--white);
+      color: var(--info);
+    }
+    &.success {
+      border: 1px solid var(--info);
+      background-color: var(--white);
+      color: var(--info);
+    }
+    &.white {
+      border: 1px solid var(--white);
+      background-color: var(--white);
+      color: var(--white);
+    }
   }
 }

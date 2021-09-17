@@ -9,8 +9,7 @@ const DUMMY_DATA = [
     max_durability: 3000,
     mileage: null,
     price: 4500,
-    minimum_rent_period: 1,
-    booked: false
+    minimum_rent_period: 1
   },
   {
     code: 'p2',
@@ -22,8 +21,7 @@ const DUMMY_DATA = [
     max_durability: 2000,
     mileage: null,
     price: 6500,
-    minimum_rent_period: 1,
-    booked: false
+    minimum_rent_period: 1
   },
   {
     code: 'p3',
@@ -35,8 +33,7 @@ const DUMMY_DATA = [
     max_durability: 50000,
     mileage: null,
     price: 3000,
-    minimum_rent_period: 2,
-    booked: false
+    minimum_rent_period: 2
   },
   {
     code: 'p4',
@@ -48,8 +45,7 @@ const DUMMY_DATA = [
     max_durability: 2000,
     mileage: null,
     price: 200,
-    minimum_rent_period: 2,
-    booked: false
+    minimum_rent_period: 2
   },
   {
     code: 'p5',
@@ -61,8 +57,7 @@ const DUMMY_DATA = [
     max_durability: 2000,
     mileage: null,
     price: 200,
-    minimum_rent_period: 2,
-    booked: false
+    minimum_rent_period: 2
   },
   {
     code: 'p6',
@@ -74,8 +69,7 @@ const DUMMY_DATA = [
     max_durability: 2000,
     mileage: null,
     price: 300,
-    minimum_rent_period: 2,
-    booked: false
+    minimum_rent_period: 2
   },
   {
     code: 'p7',
@@ -87,8 +81,7 @@ const DUMMY_DATA = [
     max_durability: 20000,
     mileage: null,
     price: 800,
-    minimum_rent_period: 30,
-    booked: false
+    minimum_rent_period: 30
   },
   {
     code: 'p8',
@@ -100,8 +93,7 @@ const DUMMY_DATA = [
     max_durability: 20000,
     mileage: null,
     price: 800,
-    minimum_rent_period: 30,
-    booked: false
+    minimum_rent_period: 30
   },
   {
     code: 'p9',
@@ -113,8 +105,7 @@ const DUMMY_DATA = [
     max_durability: 20000,
     mileage: null,
     price: 800,
-    minimum_rent_period: 30,
-    booked: false
+    minimum_rent_period: 30
   },
   {
     code: 'm1',
@@ -126,8 +117,7 @@ const DUMMY_DATA = [
     max_durability: 8000,
     mileage: 10000,
     price: 1000,
-    minimum_rent_period: 4,
-    booked: false
+    minimum_rent_period: 4
   },
   {
     code: 'm2',
@@ -139,8 +129,7 @@ const DUMMY_DATA = [
     max_durability: 10000,
     mileage: 5000,
     price: 1500,
-    minimum_rent_period: 4,
-    booked: false
+    minimum_rent_period: 4
   },
   {
     code: 'm3',
@@ -152,8 +141,7 @@ const DUMMY_DATA = [
     max_durability: 12000,
     mileage: 200,
     price: 2000,
-    minimum_rent_period: 2,
-    booked: false
+    minimum_rent_period: 2
   },
   {
     code: 'm4',
@@ -165,8 +153,7 @@ const DUMMY_DATA = [
     max_durability: 12000,
     mileage: 8500,
     price: 2500,
-    minimum_rent_period: 2,
-    booked: false
+    minimum_rent_period: 2
   },
   {
     code: 'm5',
@@ -178,8 +165,7 @@ const DUMMY_DATA = [
     max_durability: 8000,
     mileage: 600,
     price: 500,
-    minimum_rent_period: 1,
-    booked: false
+    minimum_rent_period: 1
   },
   {
     code: 'm6',
@@ -191,8 +177,7 @@ const DUMMY_DATA = [
     max_durability: 8000,
     mileage: 0,
     price: 500,
-    minimum_rent_period: 1,
-    booked: false
+    minimum_rent_period: 1
   },
   {
     code: 'm7',
@@ -204,8 +189,7 @@ const DUMMY_DATA = [
     max_durability: 8000,
     mileage: 1200,
     price: 500,
-    minimum_rent_period: 1,
-    booked: false
+    minimum_rent_period: 1
   },
   {
     code: 'm8',
@@ -217,8 +201,7 @@ const DUMMY_DATA = [
     max_durability: 10000,
     mileage: 2500,
     price: 1000,
-    minimum_rent_period: 2,
-    booked: false
+    minimum_rent_period: 2
   }
 ]
 
