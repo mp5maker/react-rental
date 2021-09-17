@@ -11,14 +11,14 @@ const durabilityCalculation = ({ miles, item }: any) => {
   const currentDurability = get(item, 'durability', 0)
   const minimumRentPeriod = get(item, 'minimum_rent_period', 0)
 
-  if (type == DURABILITY_TYPE.PLAIN) {
+  if (type === DURABILITY_TYPE.PLAIN) {
     const newDurability = currentDurability - minimumRentPeriod
-    return Math.sign(newDurability) == -1 ? 0 : newDurability
+    return Math.sign(newDurability) === -1 ? 0 : newDurability
   }
 
-  if (type == DURABILITY_TYPE.METER) {
-    const newDurability = currentDurability - (minimumRentPeriod * 2) - (days * 2)
-    return Math.sign(newDurability) == -1 ? 0 : newDurability
+  if (type === DURABILITY_TYPE.METER) {
+    const newDurability = currentDurability - minimumRentPeriod * 2 - days * 2
+    return Math.sign(newDurability) === -1 ? 0 : newDurability
   }
 
   return 0

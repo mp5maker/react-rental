@@ -21,4 +21,4 @@
 
 #### Logic Considerations ####
 * There was no discount in the given data, so the logic for discount has been ignored
-* How return will be calculated is not clear
+* The logic to calculate the total Price for the return product is not given

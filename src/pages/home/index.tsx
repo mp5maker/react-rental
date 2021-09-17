@@ -10,6 +10,7 @@ import useSearch from '../../hooks/useSearch'
 import Book from '../../components/common/book'
 import ReturnProduct from '../../components/common/returnProduct'
 import useLocalStorage from '../../hooks/useLocalStorage'
+import durabilityCalculation from '../../utitlities/durabilityCalculation'
 import { LOCAL_STORAGE_KEY } from '../../constants/settings'
 
 interface IHomeProps {}
@@ -61,9 +62,13 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
       const modifiedRentals = rentals.map((rental: any) => {
         const rentalCode = get(rental, 'code', '')
         if (rentalCode === itemCode) {
+          const durability = durabilityCalculation({ item, miles: usedMileage })
+          const mileage = isNil(get(item, 'mileage', 0)) ? 0 : get(item, 'mileage', 0)
           return {
             ...rental,
-            availability: true
+            availability: true,
+            durability,
+            mileage: mileage + Number(usedMileage)
           }
         }
         return rental

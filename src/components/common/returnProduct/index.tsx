@@ -33,10 +33,11 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
   const options = productSelect({ data: rentals, availability: false })
   const selectedObj = rentals.find(rental => get(rental, 'code', '') === selected)
   const price = get(selectedObj, 'price', 0)
+  const minimumRentPeriod = get(selectedObj, 'minimum_rent_period', 0)
 
   const onChangeMileage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = get(event, 'target.value', 0)
-    setTotalPrice(Math.ceil(parseInt(value, 10) / 10) * price)
+    setTotalPrice(minimumRentPeriod * price)
     setUsedMileage(value)
   }
 
@@ -45,7 +46,9 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
   }
 
   const onClickYes = () => {
-    setScreenIndex(MODAL_SCREEN.CALCULATION)
+    if (usedMileage) {
+      setScreenIndex(MODAL_SCREEN.CALCULATION)
+    }
   }
 
   const onClickNo = () => {
@@ -87,10 +90,11 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
   const CalculationScreenContent = (
     <div className={'book-container'}>
       <div className={'book-title'}>
-        <h3>Book a product</h3>
+        <h3>Return a product</h3>
       </div>
       <div className={'book-content'}>
-        <p>Your estimated price is ${totalPrice}</p>
+        <p>Your total price is ${totalPrice}</p>
+        <p>Do you want to proceed ?</p>
       </div>
       <div className={'yes-no'}>
         <div>
