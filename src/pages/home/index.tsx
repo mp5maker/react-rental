@@ -1,3 +1,4 @@
+import { Typography } from 'antd'
 import get from 'lodash/get'
 import isNil from 'lodash/isNil'
 import * as React from 'react'
@@ -27,14 +28,14 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
   const closeBookProduct = React.useCallback(() => setShowBookProduct(false), [])
   const openBookProduct = React.useCallback(() => setShowBookProduct(true), [])
 
-  const onChangeSearch = React.useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = get(event, 'target.value', '')
     search({
       properties: ['code', 'name', 'type', 'durability', 'mileage'],
       search: value
     })
     setSearchText(value)
-  }, [])
+  }
 
   const onConfirmBookProduct = ({ item }: any) => {
     const itemCode = get(item, 'code', '')
@@ -82,11 +83,15 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
       visible={showReturnProduct}
       key={'return-product-right'}
     >
-      <ReturnProduct
-        rentals={rentals}
-        onNo={closeReturnProduct}
-        onConfirm={onConfirmReturnProduct}
-      />
+      {showReturnProduct ? (
+        <ReturnProduct
+          rentals={rentals}
+          onNo={closeReturnProduct}
+          onConfirm={onConfirmReturnProduct}
+        />
+      ) : (
+        <></>
+      )}
     </Drawer>
   )
 
@@ -98,7 +103,11 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
       visible={showBookProduct}
       key={'book-product-right'}
     >
-      <Book rentals={rentals} onNo={closeBookProduct} onConfirm={onConfirmBookProduct} />
+      {showBookProduct ? (
+        <Book rentals={rentals} onNo={closeBookProduct} onConfirm={onConfirmBookProduct} />
+      ) : (
+        <></>
+      )}
     </Drawer>
   )
 
@@ -133,7 +142,7 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
               render: availability => {
                 return (
                   <div>
-                    <p>{availability ? 'Yes' : 'No'}</p>
+                    <Typography.Paragraph>{availability ? 'Yes' : 'No'}</Typography.Paragraph>
                   </div>
                 )
               }
@@ -150,7 +159,7 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
               render: needing_repair => {
                 return (
                   <div>
-                    <p>{needing_repair ? 'Yes' : 'No'}</p>
+                    <Typography.Paragraph>{needing_repair ? 'Yes' : 'No'}</Typography.Paragraph>
                   </div>
                 )
               }

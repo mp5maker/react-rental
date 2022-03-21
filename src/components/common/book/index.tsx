@@ -6,10 +6,12 @@ import * as React from 'react'
 import useSelect from '../../../hooks/useSelect'
 import productSelect from '../../../utitlities/productSelect'
 import Button from '../../button'
+import Col from '../../col'
 import DatePicker from '../../datepicker'
+import Row from '../../row'
 import Select from '../../select'
+import Space from '../../space'
 import ProductDetails from '../productDetails'
-import './book.scss'
 
 interface IBookProps {
   rentals: Array<any>
@@ -68,42 +70,34 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
 
   const DefaultScreenContent = (
     <div className={'book-container'}>
-      <div className={'book-title'}>
-        <Typography.Title level={3}>Book a product</Typography.Title>
-      </div>
-      <div className={'book-content'}>
-        <Select onChange={handleSelect} value={selected} options={options} />
-        <ProductDetails item={selectedObj} />
-      </div>
-      <div className={'book-footer'}>
-        <div className={'from-date'}>
-          <div>From: &nbsp;</div>
-          <div>
-            <DatePicker selected={startDate} onChange={handleStartDate} />
-          </div>
-        </div>
-        <div className={'to-date'}>
-          <div>To: &nbsp;</div>
-          <div>
-            <DatePicker selected={endDate} onChange={handleEndDate} />
-          </div>
-        </div>
-      </div>
-      <div className={'book-content'}>
-        <Typography.Paragraph className={'error-text'}>{error}</Typography.Paragraph>
-      </div>
-      <div className={'yes-no'}>
-        <div>
-          <Button onClick={onClickYes} type={'primary'}>
+      <Typography.Title level={3}>Book a product</Typography.Title>
+      <Space direction="vertical">&nbsp;</Space>
+      <Select onChange={handleSelect} value={selected} options={options} />
+      <Space direction="vertical">&nbsp;</Space>
+      <ProductDetails item={selectedObj} />
+      <Space direction="vertical">&nbsp;</Space>
+      <Typography.Title level={5}>Date Range</Typography.Title>
+      <Row>
+        <Col>
+          <DatePicker selected={startDate} onChange={handleStartDate} />
+        </Col>
+        <Col>
+          <DatePicker selected={endDate} onChange={handleEndDate} />
+        </Col>
+      </Row>
+      <Typography.Paragraph className={'error-text'}>{error}</Typography.Paragraph>
+      <Row gutter={16}>
+        <Col span={12}>
+          <Button onClick={onClickYes} type={'primary'} style={{ width: '100%' }}>
             Yes
           </Button>
-        </div>
-        <div>
-          <Button onClick={onClickNo} type={'primary'} danger>
+        </Col>
+        <Col span={12}>
+          <Button onClick={onClickNo} danger style={{ width: '100%' }}>
             No
           </Button>
-        </div>
-      </div>
+        </Col>
+      </Row>
     </div>
   )
 
