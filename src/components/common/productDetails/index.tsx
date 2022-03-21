@@ -13,20 +13,12 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ item }: any): JSX.Elem
   const needing_repair = get(item, 'needing_repair', false) ? 'Yes' : 'No'
 
   return (
-    <div>
-      <div>
-        <Typography.Paragraph>Name: {name}</Typography.Paragraph>
-      </div>
-      <div>
-        <Typography.Paragraph>Rental Period: {rentalPeriod}</Typography.Paragraph>
-      </div>
-      <div>
-        <Typography.Paragraph>Mileage: {mileage}</Typography.Paragraph>
-      </div>
-      <div>
-        <Typography.Paragraph>Repair Needed: {needing_repair}</Typography.Paragraph>
-      </div>
-    </div>
+    <>
+      <Typography.Paragraph>Name: {name}</Typography.Paragraph>
+      <Typography.Paragraph>Rental Period: {rentalPeriod}</Typography.Paragraph>
+      <Typography.Paragraph>Mileage: {mileage}</Typography.Paragraph>
+      <Typography.Paragraph>Repair Needed: {needing_repair}</Typography.Paragraph>
+    </>
   )
 }
 

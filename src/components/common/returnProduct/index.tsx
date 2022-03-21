@@ -1,3 +1,4 @@
+import { Typography } from 'antd'
 import get from 'lodash/get'
 import * as React from 'react'
 import useSelect from '../../../hooks/useSelect'
@@ -59,7 +60,7 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
   const DefaultScreenContent = (
     <div className={'return-product-container'}>
       <div className={'return-product-title'}>
-        <h3>Book a product</h3>
+        <Typography.Title level={3}>Return a product</Typography.Title>
       </div>
       <div className={'return-product-content'}>
         <Select onChange={handleSelect} value={selected} options={options} />
