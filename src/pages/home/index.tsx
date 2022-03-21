@@ -133,11 +133,11 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
               title: 'Name',
               dataIndex: 'name',
               key: 'name',
-              render: availability => {
+              render: name => {
                 return (
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     {matches ? <Typography.Paragraph>Name</Typography.Paragraph> : <></>}
-                    <Typography.Paragraph>{availability ? 'Yes' : 'No'}</Typography.Paragraph>
+                    <Typography.Paragraph>{name}</Typography.Paragraph>
                   </div>
                 )
               }
