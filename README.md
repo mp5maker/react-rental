@@ -82,3 +82,12 @@ const totalPrice = minimum_rent_period * price
 ### Website URL (Deployed using Vercel) ####
 
 [Rental App URL](https://react-rental-30qus51gt-mp5maker.vercel.app/)
+
+
+### Updated Version ###
+
+* Change the whole sass custom design to Ant Design
+* Changed the core components Text, Search, Table, Button, Typography, Drawer
+* Added optimization React.useCallback and React.memo where needed
+* Update few hooks where necessary
+* Remove sweet alert
