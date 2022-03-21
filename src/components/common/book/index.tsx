@@ -107,7 +107,7 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
         <h3>Book a product</h3>
       </div>
       <div className={'book-content-alt'}>
-        <Typography.Paragraph>Your estimated price is ${estimatedPrice}</Typography.Paragraph>
+        <Typography.Paragraph>Your estimated price is {estimatedPrice}</Typography.Paragraph>
         <Typography.Paragraph>Do you want to proceed ?</Typography.Paragraph>
       </div>
       <div className={'yes-no'}>

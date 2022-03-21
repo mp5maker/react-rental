@@ -93,7 +93,7 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
         <Typography.Title level={3}>Return a product</Typography.Title>
       </div>
       <div>
-        <Typography.Paragraph>Your total price is ${totalPrice}</Typography.Paragraph>
+        <Typography.Paragraph>Your total price is {totalPrice}</Typography.Paragraph>
         <Typography.Paragraph>Do you want to proceed ?</Typography.Paragraph>
       </div>
       <div>
