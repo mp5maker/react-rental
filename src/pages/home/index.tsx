@@ -54,7 +54,7 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
     closeBookProduct()
   }
 
-  const onConfirmReturnProduct = React.useCallback(({ item, usedMileage }) => {
+  const onConfirmReturnProduct = ({ item, usedMileage }: any) => {
     const itemCode = get(item, 'code', '')
     const modifiedRentals = rentals.map((rental: any) => {
       const rentalCode = get(rental, 'code', '')
@@ -73,7 +73,7 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
     setLocalStorage({ key: LOCAL_STORAGE_KEY.RENTAL, value: modifiedRentals })
     loadData({ value: modifiedRentals })
     closeReturnProduct()
-  }, [])
+  }
 
   const ReturnProductDrawerContent = (
     <Drawer
@@ -123,6 +123,7 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
           onReturn={openReturnProduct}
         />
         <Table
+          className={'table-container'}
           dataSource={list.map((item, index) => ({ ...item, key: index + 1 }))}
           columns={[
             {
