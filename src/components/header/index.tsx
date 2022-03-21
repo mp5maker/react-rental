@@ -1,6 +1,7 @@
 import * as React from 'react'
-import TextField from '../textField'
+import Search from '../search'
 import './header.scss'
+import {Typography} from 'antd'
 
 interface IHeaderProps {
   searchText: string
@@ -11,10 +12,10 @@ const Header: React.FC<IHeaderProps> = ({ searchText, onChangeSearch }): JSX.Ele
   return (
     <div className={'header-container'}>
       <div className={'header-left'}>
-        <h2>Rental</h2>
+        <Typography.Title>Rental</Typography.Title>
       </div>
       <div className={'header-right'}>
-        <TextField onChange={onChangeSearch} value={searchText} placeholder={'Search'} />
+        <Search onChange={onChangeSearch} value={searchText} placeholder={'Search'} />
       </div>
     </div>
   )

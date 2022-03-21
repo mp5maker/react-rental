@@ -1,3 +1,4 @@
+import { Typography } from 'antd'
 import differenceInDays from 'date-fns/differenceInDays'
 import format from 'date-fns/format'
 import get from 'lodash/get'
@@ -68,7 +69,7 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
   const DefaultScreenContent = (
     <div className={'book-container'}>
       <div className={'book-title'}>
-        <h3>Book a product</h3>
+        <Typography.Title level={3}>Book a product</Typography.Title>
       </div>
       <div className={'book-content'}>
         <Select onChange={handleSelect} value={selected} options={options} />
@@ -89,14 +90,18 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
         </div>
       </div>
       <div className={'book-content'}>
-        <p className={'error-text'}>{error}</p>
+        <Typography.Paragraph className={'error-text'}>{error}</Typography.Paragraph>
       </div>
       <div className={'yes-no'}>
         <div>
-          <Button onClick={onClickYes} type={'primary'}>Yes</Button>
+          <Button onClick={onClickYes} type={'primary'}>
+            Yes
+          </Button>
         </div>
         <div>
-          <Button onClick={onClickNo} type={'primary'} danger>No</Button>
+          <Button onClick={onClickNo} type={'primary'} danger>
+            No
+          </Button>
         </div>
       </div>
     </div>
@@ -108,8 +113,8 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
         <h3>Book a product</h3>
       </div>
       <div className={'book-content-alt'}>
-        <p>Your estimated price is ${estimatedPrice}</p>
-        <p>Do you want to proceed ?</p>
+        <Typography.Paragraph>Your estimated price is ${estimatedPrice}</Typography.Paragraph>
+        <Typography.Paragraph>Do you want to proceed ?</Typography.Paragraph>
       </div>
       <div className={'yes-no'}>
         <div>

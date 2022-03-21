@@ -1,13 +1,8 @@
+import { Input as AntInput } from 'antd'
 import * as React from 'react'
-import './textField.scss'
 
-type TTextFieldProps = React.HTMLAttributes<HTMLInputElement> & {
-  value?: string
-  type?: string
-}
-
-const TextField: React.FC<TTextFieldProps> = ({ ...props }) => {
-  return <input {...props} />
+const TextField: React.FC<React.ComponentProps<typeof AntInput>> = ({ ...props }: any) => {
+  return <AntInput {...props} />
 }
 
 export default TextField

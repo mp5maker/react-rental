@@ -1,5 +1,6 @@
-import * as React from 'react'
+import { Typography } from 'antd'
 import get from 'lodash/get'
+import * as React from 'react'
 
 interface IProductDetailsProps {
   item: any
@@ -14,16 +15,16 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ item }: any): JSX.Elem
   return (
     <div>
       <div>
-        <p>Name: {name}</p>
+        <Typography.Paragraph>Name: {name}</Typography.Paragraph>
       </div>
       <div>
-        <p>Rental Period: {rentalPeriod}</p>
+        <Typography.Paragraph>Rental Period: {rentalPeriod}</Typography.Paragraph>
       </div>
       <div>
-        <p>Mileage: {mileage}</p>
+        <Typography.Paragraph>Mileage: {mileage}</Typography.Paragraph>
       </div>
       <div>
-        <p>Repair Needed: {needing_repair}</p>
+        <Typography.Paragraph>Repair Needed: {needing_repair}</Typography.Paragraph>
       </div>
     </div>
   )
