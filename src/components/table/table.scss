@@ -1,52 +1,4 @@
 .table-container {
-  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.12);
-  padding: var(--mediumSpace);
-  border-radius: var(--commonBorderRadius);
-  min-height: 500px;
-  max-height: 500px;
-  overflow-y: auto;
-  table {
-    border-collapse: collapse;
-    table-layout: fixed;
-    width: 100%;
-    thead {
-      position: sticky;
-      top: 0;
-      background-color: var(--white);
-      th {
-        text-align: left;
-        padding-top: var(--mediumSpace);
-        padding-bottom: var(--mediumSpace);
-        &:first-child {
-          padding-left: var(--mediumSpace);
-        }
-        &:last-child {
-          padding-right: var(---mediumSpace);
-        }
-        & > div {
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-      }
-    }
-    tbody {
-      tr {
-        &:nth-child(odd) {
-          background-color: var(--lightgrey);
-        }
-        td {
-          text-align: left;
-          &:first-child {
-            padding-left: var(--mediumSpace);
-          }
-          &:last-child {
-            padding-right: var(--mediumSpace);
-          }
-        }
-      }
-    }
-  }
   @media screen and (max-width: 767px) {
     table {
       display: block;
@@ -67,6 +19,7 @@
             display: block;
             text-align: right;
             width: unset;
+            width: 100%;
             p {
               margin-top: 0;
               margin-bottom: 0;
@@ -79,9 +32,10 @@
               padding-right: 0;
               padding: var(--smallSpace);
             }
-            &:before {
+            &:after {
+              text-align: right;
+              float: right;
               content: attr(data-header);
-              float: left;
               position: relative;
             }
             padding: var(--smallSpace);

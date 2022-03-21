@@ -9,6 +9,7 @@ import Header from '../../components/header'
 import Table from '../../components/table'
 import { LOCAL_STORAGE_KEY } from '../../constants/settings'
 import useLocalStorage from '../../hooks/useLocalStorage'
+import useMediaQuery from '../../hooks/useMediaQuery'
 import useRental from '../../hooks/useRental'
 import useSearch from '../../hooks/useSearch'
 import durabilityCalculation from '../../utitlities/durabilityCalculation'
@@ -22,6 +23,7 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
   const { setLocalStorage } = useLocalStorage()
   const [showReturnProduct, setShowReturnProduct] = React.useState<boolean>(false)
   const [showBookProduct, setShowBookProduct] = React.useState<boolean>(false)
+  const matches = useMediaQuery('(max-width: 767px)')
 
   const closeReturnProduct = React.useCallback(() => setShowReturnProduct(false), [])
   const openReturnProduct = React.useCallback(() => setShowReturnProduct(true), [])
@@ -124,17 +126,34 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
         />
         <Table
           className={'table-container'}
+          sticky={true}
           dataSource={list.map((item, index) => ({ ...item, key: index + 1 }))}
           columns={[
             {
               title: 'Name',
               dataIndex: 'name',
-              key: 'name'
+              key: 'name',
+              render: availability => {
+                return (
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    {matches ? <Typography.Paragraph>Name</Typography.Paragraph> : <></>}
+                    <Typography.Paragraph>{availability ? 'Yes' : 'No'}</Typography.Paragraph>
+                  </div>
+                )
+              }
             },
             {
               title: 'Code',
               dataIndex: 'code',
-              key: 'code'
+              key: 'code',
+              render: code => {
+                return (
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    {matches ? <Typography.Paragraph>Code</Typography.Paragraph> : <></>}
+                    <Typography.Paragraph>{code}</Typography.Paragraph>
+                  </div>
+                )
+              }
             },
             {
               title: 'Availability',
@@ -142,16 +161,12 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
               key: 'availability',
               render: availability => {
                 return (
-                  <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    {matches ? <Typography.Paragraph>Availability</Typography.Paragraph> : <></>}
                     <Typography.Paragraph>{availability ? 'Yes' : 'No'}</Typography.Paragraph>
                   </div>
                 )
               }
-            },
-            {
-              title: 'Name',
-              dataIndex: 'name',
-              key: 'name'
             },
             {
               title: 'Needing Repair',
@@ -159,7 +174,8 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
               key: 'needing_repair',
               render: needing_repair => {
                 return (
-                  <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    {matches ? <Typography.Paragraph>Needing Repair</Typography.Paragraph> : <></>}
                     <Typography.Paragraph>{needing_repair ? 'Yes' : 'No'}</Typography.Paragraph>
                   </div>
                 )
@@ -168,12 +184,28 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
             {
               title: 'Durability',
               dataIndex: 'durability',
-              key: 'durability'
+              key: 'durability',
+              render: needing_repair => {
+                return (
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    {matches ? <Typography.Paragraph>Needing Repair</Typography.Paragraph> : <></>}
+                    <Typography.Paragraph>{needing_repair}</Typography.Paragraph>
+                  </div>
+                )
+              }
             },
             {
               title: 'Mileage',
               dataIndex: 'mileage',
-              key: 'mileage'
+              key: 'mileage',
+              render: mileage => {
+                return (
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    {matches ? <Typography.Paragraph>Mileage</Typography.Paragraph> : <></>}
+                    <Typography.Paragraph>{mileage}</Typography.Paragraph>
+                  </div>
+                )
+              }
             }
           ]}
         />
