@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Button, { BUTTON_COLOR_TYPE } from '../button'
+import Button from '../button'
 import './footer.scss'
 
 interface IFooterProps {
@@ -12,15 +12,11 @@ const Footer: React.FC<IFooterProps> = ({ onBook, onReturn }) => {
     <div className={'footer-container'}>
       <div className={'footer-left'}></div>
       <div className={'footer-right'}>
-        <Button
-          color={BUTTON_COLOR_TYPE.primary}
-          onClick={onBook}
-          style={{ width: '100px', marginRight: 'var(--mediumSpace)' }}
-        >
-          <p style={{ fontWeight: 'bold' }}>Book</p>
+        <Button onClick={onBook} style={{ marginRight: 'var(--smallSpace)' }}>
+          Book
         </Button>
-        <Button color={BUTTON_COLOR_TYPE.error} onClick={onReturn} style={{ width: '100px' }}>
-          <p style={{ fontWeight: 'bold' }}>Return</p>
+        <Button onClick={onReturn} danger>
+          Return
         </Button>
       </div>
     </div>

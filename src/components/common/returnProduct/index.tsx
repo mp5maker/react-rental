@@ -2,11 +2,11 @@ import get from 'lodash/get'
 import * as React from 'react'
 import useSelect from '../../../hooks/useSelect'
 import productSelect from '../../../utitlities/productSelect'
-import Button, { BUTTON_COLOR_TYPE } from '../../button'
+import Button from '../../button'
 import Select from '../../select'
 import TextField from '../../textField'
-import ProductDetails from '../productDetails'
 import '../productContainer.scss'
+import ProductDetails from '../productDetails'
 import './returnProduct.scss'
 
 interface IReturnProductProps {
@@ -75,13 +75,13 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
       </div>
       <div className={'yes-no'}>
         <div>
-          <Button onClick={onClickYes} color={BUTTON_COLOR_TYPE.success}>
-            <p>Yes</p>
+          <Button onClick={onClickYes} type={'primary'}>
+            Yes
           </Button>
         </div>
         <div>
-          <Button onClick={onClickNo} color={BUTTON_COLOR_TYPE.error}>
-            <p>No</p>
+          <Button onClick={onClickNo} type={'primary'} danger>
+            No
           </Button>
         </div>
       </div>
@@ -99,9 +99,7 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
       </div>
       <div className={'yes-no'}>
         <div>
-          <Button onClick={onClickConfirm} color={BUTTON_COLOR_TYPE.success}>
-            <p>Confirm</p>
-          </Button>
+          <Button onClick={onClickConfirm}>Confirm</Button>
         </div>
       </div>
     </div>

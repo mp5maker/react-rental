@@ -1,12 +1,12 @@
+import differenceInDays from 'date-fns/differenceInDays'
+import format from 'date-fns/format'
+import get from 'lodash/get'
 import * as React from 'react'
 import useSelect from '../../../hooks/useSelect'
 import productSelect from '../../../utitlities/productSelect'
-import Select from '../../select'
-import get from 'lodash/get'
+import Button from '../../button'
 import DatePicker from '../../datepicker'
-import Button, { BUTTON_COLOR_TYPE } from '../../button'
-import differenceInDays from 'date-fns/differenceInDays'
-import format from 'date-fns/format'
+import Select from '../../select'
 import ProductDetails from '../productDetails'
 import './book.scss'
 
@@ -93,14 +93,10 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
       </div>
       <div className={'yes-no'}>
         <div>
-          <Button onClick={onClickYes} color={BUTTON_COLOR_TYPE.success}>
-            <p>Yes</p>
-          </Button>
+          <Button onClick={onClickYes} type={'primary'}>Yes</Button>
         </div>
         <div>
-          <Button onClick={onClickNo} color={BUTTON_COLOR_TYPE.error}>
-            <p>No</p>
-          </Button>
+          <Button onClick={onClickNo} type={'primary'} danger>No</Button>
         </div>
       </div>
     </div>
@@ -117,9 +113,7 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
       </div>
       <div className={'yes-no'}>
         <div>
-          <Button onClick={onClickConfirm} color={BUTTON_COLOR_TYPE.success}>
-            <p>Confirm</p>
-          </Button>
+          <Button onClick={onClickConfirm}>Confirm</Button>
         </div>
       </div>
     </div>
