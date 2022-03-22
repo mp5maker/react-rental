@@ -91,3 +91,5 @@ const totalPrice = minimum_rent_period * price
 * Added optimization React.useCallback and React.memo where needed
 * Update few hooks where necessary
 * Remove sweet alert
+
+* Added React internationalization in the app
