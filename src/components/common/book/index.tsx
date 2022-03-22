@@ -72,7 +72,7 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
   }
 
   const DefaultScreenContent = (
-    <div className={'book-container'}>
+    <div>
       <Typography.Title level={3}>Book a product</Typography.Title>
       <Space direction="vertical">&nbsp;</Space>
       <Select onChange={handleSelect} value={selected} options={options} />
@@ -89,6 +89,7 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
         </Col>
       </Row>
       <Typography.Paragraph className={'error-text'}>{error}</Typography.Paragraph>
+      <Space direction="vertical">&nbsp;</Space>
       <Row gutter={16}>
         <Col span={12}>
           <Button onClick={onClickYes} type={'primary'} style={{ width: '100%' }}>
