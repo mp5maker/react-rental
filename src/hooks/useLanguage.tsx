@@ -10,9 +10,9 @@ const useLanguage = () => {
   const { state, dispatch }: any = React.useContext(LanguageContext)
   const currentLanguage = get(state, 'language', LANGUAGE.ENGLISH)
 
-  const changeLanguage = React.useCallback((value: LANGUAGE) => {
+  const changeLanguage = (value: LANGUAGE) => {
     dispatch({ type: ACTION_TYPES.CHANGE_LANGUAGE, value })
-  }, [])
+  }
 
   return { changeLanguage, t, i18n, state, dispatch, currentLanguage }
 }
