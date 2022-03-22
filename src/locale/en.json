@@ -18,5 +18,6 @@
   "USED_MILEAGE": "Used Mileage",
   "___YOUR_TOTAL_PRICE_IS___": "Your total price is {{price}}",
   "SEARCH": "Search",
-  "__NOT_APPLICABLE__": "N/A"
+  "__NOT_APPLICABLE__": "N/A",
+  "__MINIMUM_RENTAL_PERIOD__": "M. Rental Period"
 }

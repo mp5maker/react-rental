@@ -19,18 +19,26 @@ const ProductDetails: React.FC<IProductDetailsProps> = ({ item }: any): JSX.Elem
 
   return (
     <Card>
-      <Typography.Paragraph>
-        {t('NAME')}: {name}
-      </Typography.Paragraph>
-      <Typography.Paragraph>
-        {t('MINIMUM_RENTAL_PERIOD')}: {rentalPeriod}
-      </Typography.Paragraph>
-      <Typography.Paragraph>
-        {t('MILEAGE')}: {mileage}
-      </Typography.Paragraph>
-      <Typography.Paragraph>
-        {t('REPAIR_NEEDED')}: {needing_repair}
-      </Typography.Paragraph>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Typography.Paragraph style={{ fontWeight: 'bold' }}>{t('NAME')}</Typography.Paragraph>
+        <Typography.Paragraph>{name}</Typography.Paragraph>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Typography.Paragraph style={{ fontWeight: 'bold' }}>
+          {t('__MINIMUM_RENTAL_PERIOD__')}
+        </Typography.Paragraph>
+        <Typography.Paragraph>{rentalPeriod}</Typography.Paragraph>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Typography.Paragraph style={{ fontWeight: 'bold' }}>{t('MILEAGE')}</Typography.Paragraph>
+        <Typography.Paragraph>{mileage}</Typography.Paragraph>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Typography.Paragraph style={{ fontWeight: 'bold' }}>
+          {t('REPAIR_NEEDED')}
+        </Typography.Paragraph>
+        <Typography.Paragraph>{needing_repair}</Typography.Paragraph>
+      </div>
     </Card>
   )
 }
