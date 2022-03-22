@@ -1,15 +1,18 @@
 import CheckOutlined from '@ant-design/icons/CheckOutlined'
 import CloseOutlined from '@ant-design/icons/CloseOutlined'
 import { Typography } from 'antd'
+import format from 'date-fns/format'
 import get from 'lodash/get'
 import isNil from 'lodash/isNil'
+import omit from 'lodash/omit'
+import pick from 'lodash/pick'
 import * as React from 'react'
 import Book from '../../components/common/book'
 import ReturnProduct from '../../components/common/returnProduct'
 import Drawer from '../../components/drawer'
 import Header from '../../components/header'
 import Table from '../../components/table'
-import { LOCAL_STORAGE_KEY } from '../../constants/settings'
+import { DATE_FNS_FORMAT, LOCAL_STORAGE_KEY } from '../../constants/settings'
 import useLanguage from '../../hooks/useLanguage'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import useMediaQuery from '../../hooks/useMediaQuery'
@@ -43,14 +46,24 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
     setSearchText(value)
   }
 
-  const onConfirmBookProduct = ({ item }: any) => {
+  const onConfirmBookProduct = ({
+    item,
+    estimatedPrice,
+    startDate,
+    endDate,
+    differenceDate
+  }: any) => {
     const itemCode = get(item, 'code', '')
     const modifiedRentals = rentals.map((rental: any) => {
       const rentalCode = get(rental, 'code', '')
       if (rentalCode === itemCode) {
         return {
           ...rental,
-          availability: false
+          availability: false,
+          estimatedPrice,
+          startDate,
+          endDate,
+          differenceDate
         }
       }
       return rental
@@ -68,7 +81,7 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
         const durability = durabilityCalculation({ item, miles: usedMileage })
         const mileage = isNil(get(item, 'mileage', 0)) ? 0 : get(item, 'mileage', 0)
         return {
-          ...rental,
+          ...omit(rental, 'estimatedPrice', 'startDate', 'endDate', 'differenceDate'),
           availability: true,
           durability,
           mileage: mileage + Number(usedMileage)
@@ -132,7 +145,36 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
           pagination={false}
           className={'table-container'}
           sticky={true}
-          dataSource={list.map((item, index) => ({ ...item, key: index + 1 }))}
+          dataSource={list.map((item, index) => {
+            const picked = pick(item, 'estimatedPrice', 'startDate', 'endDate', 'differenceDate')
+            const startDate = get(picked, 'startDate', new Date())
+            const endDate = get(picked, 'endDate', new Date())
+            const differenceDate = get(picked, 'differenceDate', '')
+            const estimatedPrice = get(picked, 'estimatedPrice', '')
+            return {
+              ...item,
+              key: index + 1,
+              ...(estimatedPrice
+                ? {
+                    children: [
+                      {
+                        key: `${index}-1`,
+                        name: `${t('START_DATE')}: ${format(
+                          new Date(startDate),
+                          DATE_FNS_FORMAT.DATE
+                        )}`,
+                        code: `${t('END_DATE')}: ${format(
+                          new Date(endDate),
+                          DATE_FNS_FORMAT.DATE
+                        )}`,
+                        durability: `${t('BOOKED_FOR')}: ${differenceDate} ${t('DAY(S)')}`,
+                        mileage: `${t('ESTIMATED_PRICE')}: ${estimatedPrice}`
+                      }
+                    ]
+                  }
+                : {})
+            }
+          })}
           columns={[
             {
               title: t('NAME'),
@@ -283,7 +325,9 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
                     }}
                   >
                     {matches ? <Typography.Paragraph>{t('MILEAGE')}</Typography.Paragraph> : <></>}
-                    <Typography.Paragraph>{mileage || t('__NOT_APPLICABLE__')}</Typography.Paragraph>
+                    <Typography.Paragraph>
+                      {mileage || t('__NOT_APPLICABLE__')}
+                    </Typography.Paragraph>
                   </div>
                 )
               }

@@ -19,5 +19,9 @@
   "___YOUR_TOTAL_PRICE_IS___": "Your total price is {{price}}",
   "SEARCH": "Search",
   "__NOT_APPLICABLE__": "N/A",
-  "__MINIMUM_RENTAL_PERIOD__": "M. Rental Period"
+  "__MINIMUM_RENTAL_PERIOD__": "M. Rental Period",
+  "START_DATE": "Start Date",
+  "END_DATE": "End Date",
+  "BOOKED_FOR": "Booked For",
+  "ESTIMATED_PRICE": "Estimated Price"
 }

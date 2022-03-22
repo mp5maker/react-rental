@@ -55,7 +55,8 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
   const isValidDifferenceDate = differenceDate >= rentalPeriod
 
   const onClickConfirm = () => {
-    if (onConfirm) onConfirm({ item: selectedObj, estimatedPrice, differenceDate })
+    if (onConfirm)
+      onConfirm({ item: selectedObj, estimatedPrice, differenceDate, endDate, startDate })
   }
 
   const onClickYes = () => {
