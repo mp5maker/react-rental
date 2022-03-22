@@ -1,13 +1,17 @@
+import { Typography } from 'antd'
 import get from 'lodash/get'
 import * as React from 'react'
+import { Trans } from 'react-i18next'
+import useLanguage from '../../../hooks/useLanguage'
 import useSelect from '../../../hooks/useSelect'
 import productSelect from '../../../utitlities/productSelect'
-import Button, { BUTTON_COLOR_TYPE } from '../../button'
+import Button from '../../button'
+import Col from '../../col'
+import Row from '../../row'
 import Select from '../../select'
+import Space from '../../space'
 import TextField from '../../textField'
 import ProductDetails from '../productDetails'
-import '../productContainer.scss'
-import './returnProduct.scss'
 
 interface IReturnProductProps {
   rentals: Array<any>
@@ -35,6 +39,7 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
   const selectedObj = rentals.find(rental => get(rental, 'code', '') === selected)
   const price = get(selectedObj, 'price', 0)
   const minimumRentPeriod = get(selectedObj, 'minimum_rent_period', 0)
+  const { t } = useLanguage()
 
   const onChangeMileage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = get(event, 'target.value', 0)
@@ -57,50 +62,49 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
   }
 
   const DefaultScreenContent = (
-    <div className={'return-product-container'}>
-      <div className={'return-product-title'}>
-        <h3>Book a product</h3>
-      </div>
-      <div className={'return-product-content'}>
-        <Select onChange={handleSelect} value={selected} options={options} />
-        <ProductDetails item={selectedObj} />
-      </div>
-      <div className={'return-product-footer'}>
-        <TextField
-          value={usedMileage}
-          onChange={onChangeMileage}
-          type={'number'}
-          placeholder={'Used Mileage'}
-        />
-      </div>
-      <div className={'yes-no'}>
-        <div>
-          <Button onClick={onClickYes} color={BUTTON_COLOR_TYPE.success}>
-            <p>Yes</p>
+    <div>
+      <Typography.Title level={3}>{t('RETURN_A_PRODUCT')}</Typography.Title>
+      <Select onChange={handleSelect} value={selected} options={options} />
+      <Space direction="vertical">&nbsp;</Space>
+      <ProductDetails item={selectedObj} />
+      <Space direction="vertical">&nbsp;</Space>
+      <TextField
+        value={usedMileage}
+        onChange={onChangeMileage}
+        type={'number'}
+        placeholder={'Used Mileage'}
+      />
+      <Space direction="vertical">&nbsp;</Space>
+      <Row gutter={16}>
+        <Col span={12}>
+          <Button onClick={onClickYes} type={'primary'} style={{ width: '100%' }}>
+            {t('YES')}
           </Button>
-        </div>
-        <div>
-          <Button onClick={onClickNo} color={BUTTON_COLOR_TYPE.error}>
-            <p>No</p>
+        </Col>
+        <Col span={12}>
+          <Button onClick={onClickNo} danger style={{ width: '100%' }}>
+            {t('NO')}
           </Button>
-        </div>
-      </div>
+        </Col>
+      </Row>
     </div>
   )
 
   const CalculationScreenContent = (
-    <div className={'return-product-container'}>
-      <div className={'return-product-title'}>
-        <h3>Return a product</h3>
+    <div>
+      <div>
+        <Typography.Title level={3}>{t('RETURN_A_PRODUCT')}</Typography.Title>
       </div>
-      <div className={'return-product-content'}>
-        <p>Your total price is ${totalPrice}</p>
-        <p>Do you want to proceed ?</p>
+      <div>
+        <Typography.Paragraph>
+          <Trans i18nKey={'___YOUR_TOTAL_PRICE_IS___'} values={{ price: totalPrice }} />
+        </Typography.Paragraph>
+        <Typography.Paragraph>Do you want to proceed ?</Typography.Paragraph>
       </div>
-      <div className={'yes-no'}>
+      <div>
         <div>
-          <Button onClick={onClickConfirm} color={BUTTON_COLOR_TYPE.success}>
-            <p>Confirm</p>
+          <Button onClick={onClickConfirm} type={'primary'} style={{ width: '100%' }}>
+            Confirm
           </Button>
         </div>
       </div>

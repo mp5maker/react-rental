@@ -1,14 +1,19 @@
-import * as React from 'react'
-import useSelect from '../../../hooks/useSelect'
-import productSelect from '../../../utitlities/productSelect'
-import Select from '../../select'
-import get from 'lodash/get'
-import DatePicker from '../../datepicker'
-import Button, { BUTTON_COLOR_TYPE } from '../../button'
+import { Typography } from 'antd'
 import differenceInDays from 'date-fns/differenceInDays'
 import format from 'date-fns/format'
+import get from 'lodash/get'
+import * as React from 'react'
+import { Trans } from 'react-i18next'
+import useLanguage from '../../../hooks/useLanguage'
+import useSelect from '../../../hooks/useSelect'
+import productSelect from '../../../utitlities/productSelect'
+import Button from '../../button'
+import Col from '../../col'
+import DatePicker from '../../datepicker'
+import Row from '../../row'
+import Select from '../../select'
+import Space from '../../space'
 import ProductDetails from '../productDetails'
-import './book.scss'
 
 interface IBookProps {
   rentals: Array<any>
@@ -34,6 +39,7 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
   const price = get(selectedObj, 'price', 0)
   const [estimatedPrice, setEstimatedPrice] = React.useState<number>(0)
   const [error, setError] = React.useState<string>('')
+  const { t } = useLanguage()
 
   const handleStartDate = (date: Date) => {
     setError('')
@@ -49,7 +55,8 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
   const isValidDifferenceDate = differenceDate >= rentalPeriod
 
   const onClickConfirm = () => {
-    if (onConfirm) onConfirm({ item: selectedObj, estimatedPrice, differenceDate })
+    if (onConfirm)
+      onConfirm({ item: selectedObj, estimatedPrice, differenceDate, endDate, startDate })
   }
 
   const onClickYes = () => {
@@ -66,60 +73,53 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
   }
 
   const DefaultScreenContent = (
-    <div className={'book-container'}>
-      <div className={'book-title'}>
-        <h3>Book a product</h3>
-      </div>
-      <div className={'book-content'}>
-        <Select onChange={handleSelect} value={selected} options={options} />
-        <ProductDetails item={selectedObj} />
-      </div>
-      <div className={'book-footer'}>
-        <div className={'from-date'}>
-          <div>From: &nbsp;</div>
-          <div>
-            <DatePicker selected={startDate} onChange={handleStartDate} />
-          </div>
-        </div>
-        <div className={'to-date'}>
-          <div>To: &nbsp;</div>
-          <div>
-            <DatePicker selected={endDate} onChange={handleEndDate} />
-          </div>
-        </div>
-      </div>
-      <div className={'book-content'}>
-        <p className={'error-text'}>{error}</p>
-      </div>
-      <div className={'yes-no'}>
-        <div>
-          <Button onClick={onClickYes} color={BUTTON_COLOR_TYPE.success}>
-            <p>Yes</p>
+    <div>
+      <Typography.Title level={3}>Book a product</Typography.Title>
+      <Space direction="vertical">&nbsp;</Space>
+      <Select onChange={handleSelect} value={selected} options={options} />
+      <Space direction="vertical">&nbsp;</Space>
+      <ProductDetails item={selectedObj} />
+      <Space direction="vertical">&nbsp;</Space>
+      <Typography.Title level={5}>Date Range</Typography.Title>
+      <Row>
+        <Col>
+          <DatePicker selected={startDate} onChange={handleStartDate} />
+        </Col>
+        <Col>
+          <DatePicker selected={endDate} onChange={handleEndDate} />
+        </Col>
+      </Row>
+      <Typography.Paragraph className={'error-text'}>{error}</Typography.Paragraph>
+      <Space direction="vertical">&nbsp;</Space>
+      <Row gutter={16}>
+        <Col span={12}>
+          <Button onClick={onClickYes} type={'primary'} style={{ width: '100%' }}>
+            {t('YES')}
           </Button>
-        </div>
-        <div>
-          <Button onClick={onClickNo} color={BUTTON_COLOR_TYPE.error}>
-            <p>No</p>
+        </Col>
+        <Col span={12}>
+          <Button onClick={onClickNo} danger style={{ width: '100%' }}>
+            {t('NO')}
           </Button>
-        </div>
-      </div>
+        </Col>
+      </Row>
     </div>
   )
 
   const CalculationScreenContent = (
-    <div className={'book-container'}>
-      <div className={'book-title'}>
-        <h3>Book a product</h3>
+    <div>
+      <div>
+        <h3>{t('BOOK_A_PRODUCT')}</h3>
       </div>
-      <div className={'book-content-alt'}>
-        <p>Your estimated price is ${estimatedPrice}</p>
-        <p>Do you want to proceed ?</p>
+      <div>
+        <Typography.Paragraph>
+          <Trans i18nKey={'___YOUR_ESTIMATED_PRICE_IS___'} values={{ price: estimatedPrice }} />
+        </Typography.Paragraph>
+        <Typography.Paragraph>{t('DO_YOU_WANT_TO_PROCEED')}</Typography.Paragraph>
       </div>
-      <div className={'yes-no'}>
+      <div>
         <div>
-          <Button onClick={onClickConfirm} color={BUTTON_COLOR_TYPE.success}>
-            <p>Confirm</p>
-          </Button>
+          <Button onClick={onClickConfirm}>{t('CONFIRM')}</Button>
         </div>
       </div>
     </div>

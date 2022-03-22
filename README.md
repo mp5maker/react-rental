@@ -21,7 +21,7 @@ Took 2 days due to my work schedule
 
 * date-fns
 * lodash
-* react-datepicker (Safari do not suppor type="date" for input field)
+* react-datepicker (Safari do not support type="date" for input field)
 * sweetalert2
 
 > Formatting
@@ -82,3 +82,27 @@ const totalPrice = minimum_rent_period * price
 ### Website URL (Deployed using Vercel) ####
 
 [Rental App URL](https://react-rental-30qus51gt-mp5maker.vercel.app/)
+
+
+### Updated Version ###
+
+* Change the whole sass custom design to Ant Design
+* Changed the core components Text, Search, Table, Button, Typography, Drawer
+* Added optimization React.useCallback and React.memo where needed
+* Update few hooks where necessary
+* Remove sweet alert
+
+* Added React internationalization in the app
+
+Updated Calculation Logic
+
+<!-- Booking -->
+* Check Minimum Rental Period
+* Valiation Start Date and End Date
+* Estimated Price = (End Date - Start Date) * Price
+
+<!-- Return -->
+* Read mileage value
+* calculate days = mileage / 10
+* Reduce durability by (minimum_rent_period) => Plain
+* Reduce durability by 2 * (minimum_rent_period) - 2 * (days) => Meter
