@@ -93,3 +93,16 @@ const totalPrice = minimum_rent_period * price
 * Remove sweet alert
 
 * Added React internationalization in the app
+
+Updated Calculation Logic
+
+<!-- Booking -->
+* Check Minimum Rental Period
+* Valiation Start Date and End Date
+* Estimated Price = (End Date - Start Date) * Price
+
+<!-- Return -->
+* Read mileage value
+* calculate days = mileage / 10
+* Reduce durability by (minimum_rent_period) => Plain
+* Reduce durability by 2 * (minimum_rent_period) - 2 * (days) => Meter
