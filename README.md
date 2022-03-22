@@ -21,7 +21,7 @@ Took 2 days due to my work schedule
 
 * date-fns
 * lodash
-* react-datepicker (Safari do not suppor type="date" for input field)
+* react-datepicker (Safari do not support type="date" for input field)
 * sweetalert2
 
 > Formatting

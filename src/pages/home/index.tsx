@@ -1,3 +1,5 @@
+import CheckOutlined from '@ant-design/icons/CheckOutlined'
+import CloseOutlined from '@ant-design/icons/CloseOutlined'
 import { Typography } from 'antd'
 import get from 'lodash/get'
 import isNil from 'lodash/isNil'
@@ -8,6 +10,7 @@ import Drawer from '../../components/drawer'
 import Header from '../../components/header'
 import Table from '../../components/table'
 import { LOCAL_STORAGE_KEY } from '../../constants/settings'
+import useLanguage from '../../hooks/useLanguage'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import useRental from '../../hooks/useRental'
@@ -18,6 +21,7 @@ interface IHomeProps {}
 
 const Home: React.FC<IHomeProps> = (): JSX.Element => {
   const { rentals, loadData } = useRental()
+  const { t } = useLanguage()
   const { list, search } = useSearch({ data: rentals })
   const [searchText, setSearchText] = React.useState<string>('')
   const { setLocalStorage } = useLocalStorage()
@@ -79,7 +83,7 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
 
   const ReturnProductDrawerContent = (
     <Drawer
-      title={'Return a Product'}
+      title={t('RETURN_A_PRODUCT')}
       placement={'right'}
       onClose={closeReturnProduct}
       visible={showReturnProduct}
@@ -99,7 +103,7 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
 
   const BookProductDrawerContent = (
     <Drawer
-      title={'Book a Product'}
+      title={t('BOOK_A_PRODUCT')}
       placement={'right'}
       onClose={closeBookProduct}
       visible={showBookProduct}
@@ -130,79 +134,155 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
           dataSource={list.map((item, index) => ({ ...item, key: index + 1 }))}
           columns={[
             {
-              title: 'Name',
+              title: t('NAME'),
               dataIndex: 'name',
               key: 'name',
               render: name => {
                 return (
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    {matches ? <Typography.Paragraph>Name</Typography.Paragraph> : <></>}
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      ...(matches
+                        ? {
+                            alignItems: 'center'
+                          }
+                        : {})
+                    }}
+                  >
+                    {matches ? <Typography.Paragraph>{t('NAME')}</Typography.Paragraph> : <></>}
                     <Typography.Paragraph>{name}</Typography.Paragraph>
                   </div>
                 )
               }
             },
             {
-              title: 'Code',
+              title: t('CODE'),
               dataIndex: 'code',
               key: 'code',
               render: code => {
                 return (
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    {matches ? <Typography.Paragraph>Code</Typography.Paragraph> : <></>}
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      ...(matches
+                        ? {
+                            alignItems: 'center'
+                          }
+                        : {})
+                    }}
+                  >
+                    {matches ? <Typography.Paragraph>{t('CODE')}</Typography.Paragraph> : <></>}
                     <Typography.Paragraph>{code}</Typography.Paragraph>
                   </div>
                 )
               }
             },
             {
-              title: 'Availability',
+              title: t('AVAILABILITY'),
               dataIndex: 'availability',
               key: 'availability',
               render: availability => {
                 return (
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    {matches ? <Typography.Paragraph>Availability</Typography.Paragraph> : <></>}
-                    <Typography.Paragraph>{availability ? 'Yes' : 'No'}</Typography.Paragraph>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      ...(matches
+                        ? {
+                            alignItems: 'center'
+                          }
+                        : {})
+                    }}
+                  >
+                    {matches ? (
+                      <Typography.Paragraph>{t('AVAILABILITY')}</Typography.Paragraph>
+                    ) : (
+                      <></>
+                    )}
+                    <Typography.Paragraph>
+                      {availability ? <CheckOutlined /> : <CloseOutlined />}
+                    </Typography.Paragraph>
                   </div>
                 )
               }
             },
             {
-              title: 'Needing Repair',
+              title: t('NEEDING_REPAIR'),
               dataIndex: 'needing_repair',
               key: 'needing_repair',
               render: needing_repair => {
                 return (
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    {matches ? <Typography.Paragraph>Needing Repair</Typography.Paragraph> : <></>}
-                    <Typography.Paragraph>{needing_repair ? 'Yes' : 'No'}</Typography.Paragraph>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      ...(matches
+                        ? {
+                            alignItems: 'center'
+                          }
+                        : {})
+                    }}
+                  >
+                    {matches ? (
+                      <Typography.Paragraph>{t('NEEDING_REPAIR')}</Typography.Paragraph>
+                    ) : (
+                      <></>
+                    )}
+                    <Typography.Paragraph>
+                      {needing_repair ? <CheckOutlined /> : <CloseOutlined />}
+                    </Typography.Paragraph>
                   </div>
                 )
               }
             },
             {
-              title: 'Durability',
+              title: t('DURABILITY'),
               dataIndex: 'durability',
               key: 'durability',
-              render: needing_repair => {
+              render: durability => {
                 return (
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    {matches ? <Typography.Paragraph>Needing Repair</Typography.Paragraph> : <></>}
-                    <Typography.Paragraph>{needing_repair}</Typography.Paragraph>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      ...(matches
+                        ? {
+                            alignItems: 'center'
+                          }
+                        : {})
+                    }}
+                  >
+                    {matches ? (
+                      <Typography.Paragraph>{t('DURABILITY')}</Typography.Paragraph>
+                    ) : (
+                      <></>
+                    )}
+                    <Typography.Paragraph>{durability}</Typography.Paragraph>
                   </div>
                 )
               }
             },
             {
-              title: 'Mileage',
+              title: t('MILEAGE'),
               dataIndex: 'mileage',
               key: 'mileage',
               render: mileage => {
                 return (
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    {matches ? <Typography.Paragraph>Mileage</Typography.Paragraph> : <></>}
-                    <Typography.Paragraph>{mileage}</Typography.Paragraph>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      ...(matches
+                        ? {
+                            alignItems: 'center'
+                          }
+                        : {})
+                    }}
+                  >
+                    {matches ? <Typography.Paragraph>{t('MILEAGE')}</Typography.Paragraph> : <></>}
+                    <Typography.Paragraph>{mileage || t('__NOT_APPLICABLE__')}</Typography.Paragraph>
                   </div>
                 )
               }

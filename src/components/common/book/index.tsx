@@ -3,6 +3,8 @@ import differenceInDays from 'date-fns/differenceInDays'
 import format from 'date-fns/format'
 import get from 'lodash/get'
 import * as React from 'react'
+import { Trans } from 'react-i18next'
+import useLanguage from '../../../hooks/useLanguage'
 import useSelect from '../../../hooks/useSelect'
 import productSelect from '../../../utitlities/productSelect'
 import Button from '../../button'
@@ -37,6 +39,7 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
   const price = get(selectedObj, 'price', 0)
   const [estimatedPrice, setEstimatedPrice] = React.useState<number>(0)
   const [error, setError] = React.useState<string>('')
+  const { t } = useLanguage()
 
   const handleStartDate = (date: Date) => {
     setError('')
@@ -89,12 +92,12 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
       <Row gutter={16}>
         <Col span={12}>
           <Button onClick={onClickYes} type={'primary'} style={{ width: '100%' }}>
-            Yes
+            {t('YES')}
           </Button>
         </Col>
         <Col span={12}>
           <Button onClick={onClickNo} danger style={{ width: '100%' }}>
-            No
+            {t('NO')}
           </Button>
         </Col>
       </Row>
@@ -102,17 +105,19 @@ const Book: React.FC<IBookProps> = ({ rentals, onNo, onConfirm }): JSX.Element =
   )
 
   const CalculationScreenContent = (
-    <div className={'book-container'}>
-      <div className={'book-title'}>
-        <h3>Book a product</h3>
+    <div>
+      <div>
+        <h3>{t('BOOK_A_PRODUCT')}</h3>
       </div>
-      <div className={'book-content-alt'}>
-        <Typography.Paragraph>Your estimated price is {estimatedPrice}</Typography.Paragraph>
-        <Typography.Paragraph>Do you want to proceed ?</Typography.Paragraph>
+      <div>
+        <Typography.Paragraph>
+          <Trans i18nKey={'___YOUR_ESTIMATED_PRICE_IS___'} values={{ price: estimatedPrice }} />
+        </Typography.Paragraph>
+        <Typography.Paragraph>{t('DO_YOU_WANT_TO_PROCEED')}</Typography.Paragraph>
       </div>
-      <div className={'yes-no'}>
+      <div>
         <div>
-          <Button onClick={onClickConfirm}>Confirm</Button>
+          <Button onClick={onClickConfirm}>{t('CONFIRM')}</Button>
         </div>
       </div>
     </div>

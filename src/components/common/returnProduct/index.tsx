@@ -1,6 +1,8 @@
 import { Typography } from 'antd'
 import get from 'lodash/get'
 import * as React from 'react'
+import { Trans } from 'react-i18next'
+import useLanguage from '../../../hooks/useLanguage'
 import useSelect from '../../../hooks/useSelect'
 import productSelect from '../../../utitlities/productSelect'
 import Button from '../../button'
@@ -37,6 +39,7 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
   const selectedObj = rentals.find(rental => get(rental, 'code', '') === selected)
   const price = get(selectedObj, 'price', 0)
   const minimumRentPeriod = get(selectedObj, 'minimum_rent_period', 0)
+  const { t } = useLanguage()
 
   const onChangeMileage = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = get(event, 'target.value', 0)
@@ -60,7 +63,7 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
 
   const DefaultScreenContent = (
     <div>
-      <Typography.Title level={3}>Return a product</Typography.Title>
+      <Typography.Title level={3}>{t('RETURN_A_PRODUCT')}</Typography.Title>
       <Select onChange={handleSelect} value={selected} options={options} />
       <Space direction="vertical">&nbsp;</Space>
       <ProductDetails item={selectedObj} />
@@ -75,12 +78,12 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
       <Row gutter={16}>
         <Col span={12}>
           <Button onClick={onClickYes} type={'primary'} style={{ width: '100%' }}>
-            Yes
+            {t('YES')}
           </Button>
         </Col>
         <Col span={12}>
           <Button onClick={onClickNo} danger style={{ width: '100%' }}>
-            No
+            {t('NO')}
           </Button>
         </Col>
       </Row>
@@ -90,10 +93,12 @@ const ReturnProduct: React.FC<IReturnProductProps> = ({
   const CalculationScreenContent = (
     <div>
       <div>
-        <Typography.Title level={3}>Return a product</Typography.Title>
+        <Typography.Title level={3}>{t('RETURN_A_PRODUCT')}</Typography.Title>
       </div>
       <div>
-        <Typography.Paragraph>Your total price is {totalPrice}</Typography.Paragraph>
+        <Typography.Paragraph>
+          <Trans i18nKey={'___YOUR_TOTAL_PRICE_IS___'} values={{ price: totalPrice }} />
+        </Typography.Paragraph>
         <Typography.Paragraph>Do you want to proceed ?</Typography.Paragraph>
       </div>
       <div>

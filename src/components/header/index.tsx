@@ -28,7 +28,7 @@ const Header: React.FC<IHeaderProps> = ({
         <Button onClick={onBook} style={{ marginRight: 'var(--smallSpace)' }}>
           <BookOutlined />
         </Button>
-        <Button onClick={onReturn} danger style={{ marginRight: 'var(--smallSpace)' }}>
+        <Button onClick={onReturn} style={{ marginRight: 'var(--smallSpace)' }}>
           <RollbackOutlined />
         </Button>
         <Search
