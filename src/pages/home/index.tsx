@@ -129,6 +129,7 @@ const Home: React.FC<IHomeProps> = (): JSX.Element => {
           onReturn={openReturnProduct}
         />
         <Table
+          pagination={false}
           className={'table-container'}
           sticky={true}
           dataSource={list.map((item, index) => ({ ...item, key: index + 1 }))}
